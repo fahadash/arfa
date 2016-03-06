@@ -4,14 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Game.Controllers
+namespace TCGameMVC.Controllers
 {
+    [HandleError]
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewData["Message"] = "Welcome to ASP.NET MVC!";
 
+            return View();
+        }
+
+        public ActionResult About()
+        {
             return View();
         }
     }

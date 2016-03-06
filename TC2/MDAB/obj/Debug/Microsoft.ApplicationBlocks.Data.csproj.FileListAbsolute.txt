@@ -1,0 +1,11 @@
+C:\dev\TC\TC\MDAB\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\dev\TC\TC\MDAB\bin\Debug\Microsoft.ApplicationBlocks.Data.pdb
+C:\dev\TC\TC\MDAB\bin\Debug\Microsoft.ApplicationBlocks.Data.xml
+C:\dev\TC\TC\MDAB\obj\Debug\ResolveAssemblyReference.cache
+C:\dev\TC\TC\MDAB\obj\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\dev\TC\TC\MDAB\obj\Debug\Microsoft.ApplicationBlocks.Data.pdb
+C:\Dev\TC\TC2\MDAB\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Dev\TC\TC2\MDAB\bin\Debug\Microsoft.ApplicationBlocks.Data.pdb
+C:\Dev\TC\TC2\MDAB\bin\Debug\Microsoft.ApplicationBlocks.Data.xml
+C:\Dev\TC\TC2\MDAB\obj\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\Dev\TC\TC2\MDAB\obj\Debug\Microsoft.ApplicationBlocks.Data.pdb

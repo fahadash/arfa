@@ -1,0 +1,36 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Card] (Table)
+       [dbo].[GameResult] (Table)
+       [dbo].[GameScore] (Table)
+       [dbo].[Table] (Table)
+       [dbo].[TableState] (Table)
+       [dbo].[TableUser] (Table)
+       [dbo].[User] (Table)
+       [dbo].[UserTableInventory] (Table)
+       Default Constraint on [dbo].[Table].[Created] (Default Constraint)
+       [dbo].[FK_GameResult_ToTable] (Foreign Key)
+       [dbo].[FK_GameResult_ToUser] (Foreign Key)
+       [dbo].[FK_GameScore_Table] (Foreign Key)
+       [dbo].[FK_GameScore_User] (Foreign Key)
+       [dbo].[FK_User_Table] (Foreign Key)
+       [dbo].[FK_TableState_ToTable] (Foreign Key)
+       [dbo].[FK_TableState_ToUser] (Foreign Key)
+       [dbo].[FK_TableState_ToCard] (Foreign Key)
+       [dbo].[FK_TableUser_ToTable] (Foreign Key)
+       [dbo].[FK_TableUser_ToUser] (Foreign Key)
+       [dbo].[FK_UserTableInventory_User] (Foreign Key)
+       [dbo].[FK_UserTableInventory_Table] (Foreign Key)
+       [dbo].[FK_UserTableInventory_Card] (Foreign Key)
+
+** Supporting actions

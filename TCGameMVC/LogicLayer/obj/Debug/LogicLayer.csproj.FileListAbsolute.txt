@@ -1,0 +1,10 @@
+C:\dev\TC\TCGameMVC\LogicLayer\bin\Debug\LogicLayer.dll
+C:\dev\TC\TCGameMVC\LogicLayer\bin\Debug\LogicLayer.pdb
+C:\dev\TC\TCGameMVC\LogicLayer\bin\Debug\DataLayer.dll
+C:\dev\TC\TCGameMVC\LogicLayer\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\dev\TC\TCGameMVC\LogicLayer\bin\Debug\DataLayer.pdb
+C:\dev\TC\TCGameMVC\LogicLayer\bin\Debug\Microsoft.ApplicationBlocks.Data.pdb
+C:\dev\TC\TCGameMVC\LogicLayer\bin\Debug\Microsoft.ApplicationBlocks.Data.xml
+C:\dev\TC\TCGameMVC\LogicLayer\obj\Debug\LogicLayer.dll
+C:\dev\TC\TCGameMVC\LogicLayer\obj\Debug\LogicLayer.pdb
+C:\Dev\TC\TCGameMVC\LogicLayer\obj\Debug\LogicLayer.csprojResolveAssemblyReference.cache

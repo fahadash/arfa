@@ -1,0 +1,6 @@
+C:\dev\TC\TC\MDAB\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\dev\TC\TC\MDAB\bin\Debug\Microsoft.ApplicationBlocks.Data.pdb
+C:\dev\TC\TC\MDAB\bin\Debug\Microsoft.ApplicationBlocks.Data.xml
+C:\dev\TC\TC\MDAB\obj\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\dev\TC\TC\MDAB\obj\Debug\Microsoft.ApplicationBlocks.Data.pdb
+C:\Dev\TC\TC\MDAB\obj\Debug\Microsoft.ApplicationBlocks.Data.csprojResolveAssemblyReference.cache

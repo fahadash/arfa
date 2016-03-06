@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[Player]
+    ADD CONSTRAINT [FK_Player_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([UserId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+

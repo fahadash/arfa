@@ -1,0 +1,43 @@
+﻿** Warnings
+     The object reference [dbo].[User].[UserName] differs only by case from the object definition [dbo].[User].[Username].
+
+** Highlights
+     Tables that will be rebuilt
+       [dbo].[Table]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [dbo].[Table].[TableName] on table [dbo].[Table] must be added, but the column has no default value and does
+         not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either:
+         add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a
+         deployment option.
+
+** User actions
+     Drop
+       on [dbo].[Table].[Created] (Default Constraint)
+       on [dbo].[Table].[Suspended] (Default Constraint)
+     Table rebuild
+       [dbo].[Table] (Table)
+     Create
+       [dbo].[usp_ListJoinableTables] (Procedure)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_GameResult_ToTable] (Foreign Key)
+       [dbo].[FK_GameScore_Table] (Foreign Key)
+       [dbo].[FK_User_Table] (Foreign Key)
+       [dbo].[FK_TableState_ToTable] (Foreign Key)
+       [dbo].[FK_TableUser_ToTable] (Foreign Key)
+       [dbo].[FK_UserTableInventory_Table] (Foreign Key)
+     Create
+       [dbo].[FK_GameResult_ToTable] (Foreign Key)
+       [dbo].[FK_GameScore_Table] (Foreign Key)
+       [dbo].[FK_User_Table] (Foreign Key)
+       [dbo].[FK_TableState_ToTable] (Foreign Key)
+       [dbo].[FK_TableUser_ToTable] (Foreign Key)
+       [dbo].[FK_UserTableInventory_Table] (Foreign Key)
+
+The column [dbo].[Table].[TableName] on table [dbo].[Table] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+

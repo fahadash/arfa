@@ -1,0 +1,37 @@
+﻿@model TCWeb.Areas.Table.Models.PlayLoungeModel
+@{
+    ViewBag.Title = "Play Lounge";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Play Lounge</h2>
+<div>
+    @Html.HiddenFor(m => m.LoginToken, new Dictionary<string, object> {{"id", "loginToken"} })
+    
+    @Html.HiddenFor(m => m.TableServiceUrl, new Dictionary<string, object> {{"id", "tableServiceUrl"} })
+            <div id="tableTabStrip">
+            <ul>
+                <li class="k-state-active">Join a Table</li>
+                <li id="myOwnTablesLi">My own tables</li>
+                <li>Tables I am on</li>
+            </ul>
+        </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#tableTabStrip").kendoTabStrip({
+            animation: { open: { effects: "fadeIn"} },
+            contentUrls: [
+                        '@Url.Action("JoinATable")',
+                        '@Url.Action("MyOwnTables")',
+                        '@Url.Action("TablesIamOn")'
+                    ]
+        });
+
+
+    });
+</script>
+
+

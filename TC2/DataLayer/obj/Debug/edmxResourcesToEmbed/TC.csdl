@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TCGameDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="TCGameDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cards" EntityType="TCGameDBModel.Card" />
+    <EntitySet Name="Games" EntityType="TCGameDBModel.Game" />
+    <EntitySet Name="GameStates" EntityType="TCGameDBModel.GameState" />
+    <EntitySet Name="Players" EntityType="TCGameDBModel.Player" />
+    <EntitySet Name="Registrations" EntityType="TCGameDBModel.Registration" />
+    <EntitySet Name="Scores" EntityType="TCGameDBModel.Score" />
+    <EntitySet Name="TESTs" EntityType="TCGameDBModel.TEST" />
+    <AssociationSet Name="FK_GameState_CardId" Association="TCGameDBModel.FK_GameState_CardId">
+      <End Role="Card" EntitySet="Cards" />
+      <End Role="GameState" EntitySet="GameStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GameState_Game" Association="TCGameDBModel.FK_GameState_Game">
+      <End Role="Game" EntitySet="Games" />
+      <End Role="GameState" EntitySet="GameStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Player_Game" Association="TCGameDBModel.FK_Player_Game">
+      <End Role="Game" EntitySet="Games" />
+      <End Role="Player" EntitySet="Players" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Score_Game" Association="TCGameDBModel.FK_Score_Game">
+      <End Role="Game" EntitySet="Games" />
+      <End Role="Score" EntitySet="Scores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GameState_Player" Association="TCGameDBModel.FK_GameState_Player">
+      <End Role="Player" EntitySet="Players" />
+      <End Role="GameState" EntitySet="GameStates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Player_User" Association="TCGameDBModel.FK_Player_User">
+      <End Role="Registration" EntitySet="Registrations" />
+      <End Role="Player" EntitySet="Players" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Score_Player" Association="TCGameDBModel.FK_Score_Player">
+      <End Role="Player" EntitySet="Players" />
+      <End Role="Score" EntitySet="Scores" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Card">
+    <Key>
+      <PropertyRef Name="CardId" />
+    </Key>
+    <Property Name="CardId" Type="Int32" Nullable="false" />
+    <Property Name="Symbol" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="Letter" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="Worth" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="GameStates" Relationship="TCGameDBModel.FK_GameState_CardId" FromRole="Card" ToRole="GameState" />
+  </EntityType>
+  <EntityType Name="Game">
+    <Key>
+      <PropertyRef Name="GameId" />
+    </Key>
+    <Property Name="GameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="DateCreated" Type="DateTime" />
+    <NavigationProperty Name="GameStates" Relationship="TCGameDBModel.FK_GameState_Game" FromRole="Game" ToRole="GameState" />
+    <NavigationProperty Name="Players" Relationship="TCGameDBModel.FK_Player_Game" FromRole="Game" ToRole="Player" />
+    <NavigationProperty Name="Scores" Relationship="TCGameDBModel.FK_Score_Game" FromRole="Game" ToRole="Score" />
+  </EntityType>
+  <EntityType Name="GameState">
+    <Key>
+      <PropertyRef Name="PlayerId" />
+      <PropertyRef Name="GameId" />
+      <PropertyRef Name="CardId" />
+      <PropertyRef Name="SequenceNumber" />
+    </Key>
+    <Property Name="PlayerId" Type="Int32" Nullable="false" />
+    <Property Name="GameId" Type="Int32" Nullable="false" />
+    <Property Name="CardId" Type="Int32" Nullable="false" />
+    <Property Name="SequenceNumber" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Card" Relationship="TCGameDBModel.FK_GameState_CardId" FromRole="GameState" ToRole="Card" />
+    <NavigationProperty Name="Game" Relationship="TCGameDBModel.FK_GameState_Game" FromRole="GameState" ToRole="Game" />
+    <NavigationProperty Name="Player" Relationship="TCGameDBModel.FK_GameState_Player" FromRole="GameState" ToRole="Player" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="PlayerId" />
+    </Key>
+    <Property Name="PlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="GameId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Game" Relationship="TCGameDBModel.FK_Player_Game" FromRole="Player" ToRole="Game" />
+    <NavigationProperty Name="GameStates" Relationship="TCGameDBModel.FK_GameState_Player" FromRole="Player" ToRole="GameState" />
+    <NavigationProperty Name="Registration" Relationship="TCGameDBModel.FK_Player_User" FromRole="Player" ToRole="Registration" />
+    <NavigationProperty Name="Scores" Relationship="TCGameDBModel.FK_Score_Player" FromRole="Player" ToRole="Score" />
+  </EntityType>
+  <EntityType Name="Registration">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Firstname" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Lastname" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="70" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Players" Relationship="TCGameDBModel.FK_Player_User" FromRole="Registration" ToRole="Player" />
+  </EntityType>
+  <EntityType Name="Score">
+    <Key>
+      <PropertyRef Name="PlayerId" />
+      <PropertyRef Name="GameId" />
+    </Key>
+    <Property Name="PlayerId" Type="Int32" Nullable="false" />
+    <Property Name="GameId" Type="Int32" Nullable="false" />
+    <Property Name="Score1" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Game" Relationship="TCGameDBModel.FK_Score_Game" FromRole="Score" ToRole="Game" />
+    <NavigationProperty Name="Player" Relationship="TCGameDBModel.FK_Score_Player" FromRole="Score" ToRole="Player" />
+  </EntityType>
+  <EntityType Name="TEST">
+    <Key>
+      <PropertyRef Name="CardId" />
+      <PropertyRef Name="Symbol" />
+      <PropertyRef Name="Letter" />
+      <PropertyRef Name="Worth" />
+      <PropertyRef Name="Image" />
+    </Key>
+    <Property Name="CardId" Type="Int32" Nullable="false" />
+    <Property Name="Symbol" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="Letter" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="Worth" Type="Int32" Nullable="false" />
+    <Property Name="Image" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_GameState_CardId">
+    <End Role="Card" Type="TCGameDBModel.Card" Multiplicity="1" />
+    <End Role="GameState" Type="TCGameDBModel.GameState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Card">
+        <PropertyRef Name="CardId" />
+      </Principal>
+      <Dependent Role="GameState">
+        <PropertyRef Name="CardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GameState_Game">
+    <End Role="Game" Type="TCGameDBModel.Game" Multiplicity="1" />
+    <End Role="GameState" Type="TCGameDBModel.GameState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="GameId" />
+      </Principal>
+      <Dependent Role="GameState">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Player_Game">
+    <End Role="Game" Type="TCGameDBModel.Game" Multiplicity="1" />
+    <End Role="Player" Type="TCGameDBModel.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="GameId" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Score_Game">
+    <End Role="Game" Type="TCGameDBModel.Game" Multiplicity="1" />
+    <End Role="Score" Type="TCGameDBModel.Score" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="GameId" />
+      </Principal>
+      <Dependent Role="Score">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GameState_Player">
+    <End Role="Player" Type="TCGameDBModel.Player" Multiplicity="1" />
+    <End Role="GameState" Type="TCGameDBModel.GameState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="PlayerId" />
+      </Principal>
+      <Dependent Role="GameState">
+        <PropertyRef Name="PlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Player_User">
+    <End Role="Registration" Type="TCGameDBModel.Registration" Multiplicity="1" />
+    <End Role="Player" Type="TCGameDBModel.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Registration">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Score_Player">
+    <End Role="Player" Type="TCGameDBModel.Player" Multiplicity="1" />
+    <End Role="Score" Type="TCGameDBModel.Score" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="PlayerId" />
+      </Principal>
+      <Dependent Role="Score">
+        <PropertyRef Name="PlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

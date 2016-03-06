@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataLayer.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DataLayerStoreContainer">
+    <EntitySet Name="Card" EntityType="DataLayer.Store.Card" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Game" EntityType="DataLayer.Store.Game" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GameState" EntityType="DataLayer.Store.GameState" store:Type="Tables" store:Schema="dbo" store:Name="GameState">
+      <DefiningQuery>SELECT 
+[GameState].[PlayerId] AS [PlayerId], 
+[GameState].[GameId] AS [GameId], 
+[GameState].[CardId] AS [CardId], 
+[GameState].[SequenceNumber] AS [SequenceNumber]
+FROM [dbo].[GameState] AS [GameState]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Player" EntityType="DataLayer.Store.Player" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Registration" EntityType="DataLayer.Store.Registration" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Score" EntityType="DataLayer.Store.Score" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TEST" EntityType="DataLayer.Store.TEST" store:Type="Tables" store:Schema="dbo" store:Name="TEST">
+      <DefiningQuery>SELECT 
+[TEST].[CardId] AS [CardId], 
+[TEST].[Symbol] AS [Symbol], 
+[TEST].[Letter] AS [Letter], 
+[TEST].[Worth] AS [Worth], 
+[TEST].[Image] AS [Image]
+FROM [dbo].[TEST] AS [TEST]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_GameState_CardId" Association="DataLayer.Store.FK_GameState_CardId">
+      <End Role="Card" EntitySet="Card" />
+      <End Role="GameState" EntitySet="GameState" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GameState_Game" Association="DataLayer.Store.FK_GameState_Game">
+      <End Role="Game" EntitySet="Game" />
+      <End Role="GameState" EntitySet="GameState" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GameState_Player" Association="DataLayer.Store.FK_GameState_Player">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="GameState" EntitySet="GameState" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Player_Game" Association="DataLayer.Store.FK_Player_Game">
+      <End Role="Game" EntitySet="Game" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Player_User" Association="DataLayer.Store.FK_Player_User">
+      <End Role="Registration" EntitySet="Registration" />
+      <End Role="Player" EntitySet="Player" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Score_Game" Association="DataLayer.Store.FK_Score_Game">
+      <End Role="Game" EntitySet="Game" />
+      <End Role="Score" EntitySet="Score" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Score_Player" Association="DataLayer.Store.FK_Score_Player">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="Score" EntitySet="Score" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Card">
+    <Key>
+      <PropertyRef Name="CardId" />
+    </Key>
+    <Property Name="CardId" Type="int" Nullable="false" />
+    <Property Name="Symbol" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="Letter" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="Worth" Type="int" Nullable="false" />
+    <Property Name="Image" Type="varchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Game">
+    <Key>
+      <PropertyRef Name="GameId" />
+    </Key>
+    <Property Name="GameId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="DateCreated" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TCGameDB.dbo.GameState' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+-->
+  <EntityType Name="GameState">
+    <Key>
+      <PropertyRef Name="PlayerId" />
+      <PropertyRef Name="GameId" />
+      <PropertyRef Name="CardId" />
+      <PropertyRef Name="SequenceNumber" />
+    </Key>
+    <Property Name="PlayerId" Type="int" Nullable="false" />
+    <Property Name="GameId" Type="int" Nullable="false" />
+    <Property Name="CardId" Type="int" Nullable="false" />
+    <Property Name="SequenceNumber" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="PlayerId" />
+    </Key>
+    <Property Name="PlayerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="GameId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Registration">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Firstname" Type="varchar" MaxLength="50" />
+    <Property Name="Lastname" Type="varchar" MaxLength="50" />
+    <Property Name="Age" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="70" />
+  </EntityType>
+  <EntityType Name="Score">
+    <Key>
+      <PropertyRef Name="PlayerId" />
+      <PropertyRef Name="GameId" />
+    </Key>
+    <Property Name="PlayerId" Type="int" Nullable="false" />
+    <Property Name="GameId" Type="int" Nullable="false" />
+    <Property Name="Score" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TCGameDB.dbo.TEST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+-->
+  <EntityType Name="TEST">
+    <Key>
+      <PropertyRef Name="CardId" />
+      <PropertyRef Name="Symbol" />
+      <PropertyRef Name="Letter" />
+      <PropertyRef Name="Worth" />
+      <PropertyRef Name="Image" />
+    </Key>
+    <Property Name="CardId" Type="int" Nullable="false" />
+    <Property Name="Symbol" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="Letter" Type="varchar" Nullable="false" MaxLength="1" />
+    <Property Name="Worth" Type="int" Nullable="false" />
+    <Property Name="Image" Type="varchar" Nullable="false" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK_GameState_CardId">
+    <End Role="Card" Type="DataLayer.Store.Card" Multiplicity="1" />
+    <End Role="GameState" Type="DataLayer.Store.GameState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Card">
+        <PropertyRef Name="CardId" />
+      </Principal>
+      <Dependent Role="GameState">
+        <PropertyRef Name="CardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GameState_Game">
+    <End Role="Game" Type="DataLayer.Store.Game" Multiplicity="1" />
+    <End Role="GameState" Type="DataLayer.Store.GameState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="GameId" />
+      </Principal>
+      <Dependent Role="GameState">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GameState_Player">
+    <End Role="Player" Type="DataLayer.Store.Player" Multiplicity="1" />
+    <End Role="GameState" Type="DataLayer.Store.GameState" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="PlayerId" />
+      </Principal>
+      <Dependent Role="GameState">
+        <PropertyRef Name="PlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Player_Game">
+    <End Role="Game" Type="DataLayer.Store.Game" Multiplicity="1" />
+    <End Role="Player" Type="DataLayer.Store.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="GameId" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Player_User">
+    <End Role="Registration" Type="DataLayer.Store.Registration" Multiplicity="1" />
+    <End Role="Player" Type="DataLayer.Store.Player" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Registration">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Score_Game">
+    <End Role="Game" Type="DataLayer.Store.Game" Multiplicity="1" />
+    <End Role="Score" Type="DataLayer.Store.Score" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Game">
+        <PropertyRef Name="GameId" />
+      </Principal>
+      <Dependent Role="Score">
+        <PropertyRef Name="GameId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Score_Player">
+    <End Role="Player" Type="DataLayer.Store.Player" Multiplicity="1" />
+    <End Role="Score" Type="DataLayer.Store.Score" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="PlayerId" />
+      </Principal>
+      <Dependent Role="Score">
+        <PropertyRef Name="PlayerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="CheckForDuplicateUsername" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CreateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Firstname" Type="varchar" Mode="In" />
+    <Parameter Name="Lastname" Type="varchar" Mode="In" />
+    <Parameter Name="Age" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Logon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+</Schema>

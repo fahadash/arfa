@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="gameApp">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="gamestyle.css" />
+    <title></title>
+
+
+    <script type="text/javascript" src="scripts/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/gameApp.js"></script>
+</head>
+    <body>
+        <div class="fulltable" ng-controller="TableController">
+
+            <table border="0" class="maintable">
+                <tr class="toprow">
+                    <td colspan="3" align="center">
+                        <div> name 0</div>
+                        <div>13 Cards</div>
+                    </td>
+                </tr>
+                <tr class="middlerow">
+                    <td class="leftplayer" valign="middle">
+                        <div> name 1</div>
+                        <div>13 Cards</div>
+                    </td>
+                    <td class="canvas">
+
+                        <table class="canvasInfo" border="1">
+                            <tr>
+                                <td style="width:33%;">
+                                    <div style="max-width: 200px;" >
+                                        Table name: {{ TableState.tableName }}
+                                        <br />
+                                        Game started: {{ TableState.gameStarted }}
+                                    </div>
+                                </td>
+                                <td style="width:33%;"></td>
+                                <td style="width:33%;"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td valign="center" align="center">
+                                    <div>
+                                        5 Hands
+                                    </div>
+
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr style="width:33%;">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+
+                    </td>
+                    <td class="rightplayer" valign="middle" align="right">
+                        <div> name 2</div>
+                        <div>13 Cards</div>
+                    </td>
+                </tr>
+                <tr class="bottomrow">
+                    <td colspan="3" align="center"
+                        ng-init="cards=[{cardalias:'5d'}]">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div> You</div>
+                                    <div>13 Cards</div>
+                                </td>
+
+                                <td ng-repeat="card in cards">
+                                    <img src="Images/Classic/Deck/{{ card.cardalias }}.png">
+                                </td>
+
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+    </body>
+</html>

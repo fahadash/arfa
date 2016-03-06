@@ -1,0 +1,95 @@
+﻿html, body {margin:0;padding:0;height:100%; width:100%;}
+.fulltable{
+ height:100%;
+  width:100%;
+ /* or overflow:auto; if you want scrollbars */
+
+  background-color:burlywood;
+}
+.canvasInfo {
+    height:100%;
+  width:100%;
+    border-width: 2px;
+    border-color: black; 
+}
+.maintable{
+    min-height: 500px;
+ height:100%;
+  width:100%;
+ /* or overflow:auto; if you want scrollbars */
+
+  background-color:burlywood;
+}
+
+.disable-overlay-layer {
+    /* A dark translucent div that covers the whole screen */
+  position:absolute;
+  z-index:9999;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:#000000;
+    -ms-opacity: 0.2;
+    opacity: 0.2;
+}
+
+.n
+
+.gamespanel {
+    overflow: visible;
+}
+.canvasCurrentCard {
+    align-content: center;
+    align-items: center;
+    align-self: center;
+}
+.turnPane {
+    background-color: beige;
+    color: brown;
+    font-family: Verdana;
+    font-size: 15pt;
+    line-height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    align-content: stretch;
+    height: 100%;
+}
+.clickablecard {
+    cursor: pointer;
+    border: 0;
+}
+img.trumpbutton {
+    cursor: pointer;
+    border: 0;
+}
+
+img.trumpbutton:hover {
+    cursor: hand;
+    border: 2px;
+    border-color: darkgray;
+}
+
+.toprow{
+    height:20%;
+}
+.middlerow{
+    height:60%;
+}
+.bottomrow{
+    height:20%;
+}
+
+.leftplayer
+{
+    width:20%
+}
+.rightplayer
+{
+    width:20%
+}
+
+.canvas
+{
+    width:60%
+}

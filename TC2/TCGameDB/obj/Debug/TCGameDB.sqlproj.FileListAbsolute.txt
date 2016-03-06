@@ -1,0 +1,9 @@
+C:\Dev\TC\TC2\TCGameDB\sql\debug\TCGameDB.dacpac
+C:\Dev\TC\TC2\TCGameDB\sql\debug\TCGameDB.dll
+C:\Dev\TC\TC2\TCGameDB\sql\debug\TCGameDB.pdb
+C:\Dev\TC\TC2\TCGameDB\obj\Debug\Model.xml
+C:\Dev\TC\TC2\TCGameDB\obj\Debug\refactor.xml
+C:\Dev\TC\TC2\TCGameDB\obj\Debug\postdeploy.sql
+C:\Dev\TC\TC2\TCGameDB\obj\Debug\predeploy.sql
+C:\Dev\TC\TC2\TCGameDB\obj\Debug\TCGameDB.dll
+C:\Dev\TC\TC2\TCGameDB\obj\Debug\TCGameDB.pdb

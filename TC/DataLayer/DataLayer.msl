@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataLayerStoreContainer" CdmEntityContainer="GameConn">
+    <EntitySetMapping Name="Card" StoreEntitySet="Card" TypeName="DataLayer.Card">
+      <ScalarProperty Name="CardId" ColumnName="CardId" />
+      <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+      <ScalarProperty Name="Letter" ColumnName="Letter" />
+      <ScalarProperty Name="Worth" ColumnName="Worth" />
+      <ScalarProperty Name="Image" ColumnName="Image" />
+    </EntitySetMapping>
+    <EntitySetMapping Name="Game" StoreEntitySet="Game" TypeName="DataLayer.Game">
+      <ScalarProperty Name="GameId" ColumnName="GameId" />
+      <ScalarProperty Name="Description" ColumnName="Description" />
+      <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+    </EntitySetMapping>
+    <EntitySetMapping Name="GameState" StoreEntitySet="GameState" TypeName="DataLayer.GameState">
+      <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+      <ScalarProperty Name="GameId" ColumnName="GameId" />
+      <ScalarProperty Name="CardId" ColumnName="CardId" />
+      <ScalarProperty Name="SequenceNumber" ColumnName="SequenceNumber" />
+    </EntitySetMapping>
+    <EntitySetMapping Name="Player" StoreEntitySet="Player" TypeName="DataLayer.Player">
+      <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+      <ScalarProperty Name="UserId" ColumnName="UserId" />
+      <ScalarProperty Name="GameId" ColumnName="GameId" />
+    </EntitySetMapping>
+    <EntitySetMapping Name="Registration" StoreEntitySet="Registration" TypeName="DataLayer.Registration">
+      <ScalarProperty Name="UserId" ColumnName="UserId" />
+      <ScalarProperty Name="Username" ColumnName="Username" />
+      <ScalarProperty Name="Password" ColumnName="Password" />
+      <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+      <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+      <ScalarProperty Name="Age" ColumnName="Age" />
+      <ScalarProperty Name="Email" ColumnName="Email" />
+    </EntitySetMapping>
+    <EntitySetMapping Name="Score" StoreEntitySet="Score" TypeName="DataLayer.Score">
+      <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+      <ScalarProperty Name="GameId" ColumnName="GameId" />
+      <ScalarProperty Name="Score1" ColumnName="Score" />
+    </EntitySetMapping>
+    <EntitySetMapping Name="TEST" StoreEntitySet="TEST" TypeName="DataLayer.TEST">
+      <ScalarProperty Name="CardId" ColumnName="CardId" />
+      <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+      <ScalarProperty Name="Letter" ColumnName="Letter" />
+      <ScalarProperty Name="Worth" ColumnName="Worth" />
+      <ScalarProperty Name="Image" ColumnName="Image" />
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title><script>
+  $(function() {
+      $("#accordion").accordion({
+          heightStyle: "content"
+      });
+  });
+</script>
+</head>
+<body>
+        <h1 align="center">Member area</h1>
+        <p>
+            <div style="color: red;"> {{ errorMessage }}</div>
+        </p>
+        <p>Hello {{ memberName }}</p>
+
+    <div id="accordion" >
+        <h3>Create a new Game</h3>
+        <div ng-model="newGame">
+
+            <div><input ng-model="gameName" type="text" />
+                <input ng-click="createGame(loginToken, gameName)" type="button" value="{{ createButton.caption }}" ng-disabled="!createButton.enabled" /></div>
+        </div>
+     
+        <h3>Games I Own</h3>
+        <div class="gamespanel">
+
+            <div ng-repeat="table in myGames">
+
+                <a href="#/table/{{loginToken}}/{{table.TableId}}"> {{ table.TableName }} </a>
+            </div>
+
+        </div>
+
+        <h3>Games I am on</h3>
+        <div class="gamespanel">
+
+            <div ng-repeat="table in otherGames">
+
+                <a href="#/table/{{loginToken}}/{{table.TableId}}"> {{table.TableName}} </a>
+            </div>
+
+        </div>
+
+
+        <h3>Find Games to Join</h3>
+        <div class="gamespanel">
+
+            <div ng-repeat="table in gamesToJoin">
+                {{table.TableName}} ({{table.AvailableSlots}})
+                <input type="button" value="Join" ng-click="joinTable(loginToken, table.TableId)" />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

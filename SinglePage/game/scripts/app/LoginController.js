@@ -1,4 +1,4 @@
-﻿var accountUrl = "http://localhost:46197/api/UserAccount/";
+﻿var accountUrl = serviceUrlBase + "/UserAccount/";
 
 gameApp.factory('accountFactory', function ($http) {
     var factory = {};

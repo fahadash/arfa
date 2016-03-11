@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+
+    <body>
+
+        <div class="maintable" ng-show="!gameStarted">
+            Game not started 
+            
+            <div ng-show="iAmOwner">
+                <input type="button" value="Start Game" ng-click="startGame(loginToken, gameId);" />
+            </div>
+
+        </div>
+
+        <div class="fulltable" ng-show="gameStarted && !hasToChooseTrump">
+
+            <table border="1" class="maintable">
+                <tr class="toprow">
+                    <td colspan="3" align="center">
+                        <div> {{ topPlayer.userinfo.username }}</div>
+                        <div>{{ topPlayer.cardcount }} Card(s)</div>
+                        <div>Score: {{ topPlayer.gamescore }} </div>
+                    </td>
+                </tr>
+                <tr class="middlerow">
+                    <td class="leftplayer" valign="middle">
+                        <div> {{ leftPlayer.userinfo.username }}</div>
+                        <div>{{ leftPlayer.cardcount }} Card(s)</div>
+                        <div>Score: {{ leftPlayer.gamescore }} </div>
+                    </td>
+                    <td class="canvas">
+
+                        <table class="canvasInfo" border="1">
+                            <tr>
+                                <td style="width:33%;height: 150px;">
+                                    <div style="max-width: 200px;">
+                                        Table name: {{ tableName }}
+                                        <br />
+                                        Game started: {{ gameStarted }}
+                                        <div ng-show="trumpChosen">
+                                            Trump: <img src="Images/Classic/Suit/{{trump}}.png" width="20" height="20" />
+                                        </div>
+                                        <div ng-show="currentSuit != null">
+                                            Current Suit: <img src="Images/Classic/Suit/{{currentSuit}}.png" width="20" height="20" />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="width:33%;" align="center">
+
+                                    <div ng-show="topPlayer.currentcard != null" class="canvasCurrentCard">
+                                        <img src="Images/Classic/Deck/{{ topPlayer.currentcard.cardalias }}.png" />
+
+                                    </div>
+                                    <div class="turnPane" ng-show="topPlayer.turn">
+                                        <br />
+                                        <br />
+                                        <br />
+                                        This user's turn
+                                    </div>
+
+                                </td>
+                                <td style="width:33%;"></td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="height: 150px;">
+                                    <div ng-show="leftPlayer.currentcard != null" class="canvasCurrentCard">
+                                        <img src="Images/Classic/Deck/{{ leftPlayer.currentcard.cardalias }}.png" />
+
+                                    </div>
+
+                                    <div class="turnPane" ng-show="leftPlayer.turn">
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        This user's turn
+                                    </div>
+                                </td>
+                                <td valign="center" align="center">
+                                    <div>
+                                        <table>
+                                            <tr>
+                                                <td colspan="3" align="center">
+                                                    <div ng-show="topPlayer.previouscard != null">
+                                                        <img src="Images/Classic/Deck/{{ topPlayer.previouscard.cardalias }}.png" width="39"
+                                                             height="57" />
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div ng-show="leftPlayer.previouscard != null">
+                                                        <img src="Images/Classic/Deck/{{ leftPlayer.previouscard.cardalias }}.png" width="39"
+                                                             height="57" />
+
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    {{ handsAccumulated }} Hand(s)
+                                                </td>
+                                                <td>
+                                                    <div ng-show="rightPlayer.previouscard != null">
+                                                        <img src="Images/Classic/Deck/{{ rightPlayer.previouscard.cardalias }}.png" width="39"
+                                                             height="57" />
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" align="center">
+                                                    <div ng-show="me.previouscard != null">
+                                                        <img src="Images/Classic/Deck/{{ me.previouscard.cardalias }}.png" width="39"
+                                                             height="57" />
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+
+                                </td>
+                                <td align="center">
+
+                                    <div ng-show="rightPlayer.currentcard != null" class="canvasCurrentCard">
+                                        <img src="Images/Classic/Deck/{{ rightPlayer.currentcard.cardalias }}.png" />
+
+                                    </div>
+                                    <div class="turnPane" ng-show="rightPlayer.turn">
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                        This user's turn
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="width:33%;height: 150px;">
+                                <td></td>
+                                <td align="center">
+                                    <div ng-show="me.currentcard != null" class="canvasCurrentCard">
+                                        <img src="Images/Classic/Deck/{{ me.currentcard.cardalias }}.png" />
+
+                                    </div>
+
+                                    <div class="turnPane" ng-show="me.turn">
+                                        <br />
+                                        <br />
+                                        <br />
+                                        Your turn
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+
+                    </td>
+                    <td class="rightplayer" valign="middle" align="right">
+                        <div> {{ rightPlayer.userinfo.username }}</div>
+                        <div>{{ rightPlayer.cardcount }} Card(s)</div>
+                        <div>Score: {{ rightPlayer.gamescore }} </div>
+                    </td>
+                </tr>
+                <tr class="bottomrow" ng-model="me">
+                    <td colspan="3" align="center">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div>  {{ me.userinfo.username }} (You)</div>
+                                    <div>{{ me.cardcount }} Card(s)</div>
+                                    <div>Score: {{ me.gamescore }} </div>
+                                </td>
+
+                                <td ng-repeat="card in me.yourcards">
+                                    <img src="Images/Classic/Deck/{{ card.cardalias }}.png"
+                                         class="clickablecard"
+                                         ng-click="submitCard(loginToken, tableId,  card.cardalias)">
+                                </td>
+
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        
+        <div ng-show="hasToChooseTrump" align="center">
+            <div>Please look at your cards and choose a trump suit from below.</div>
+            <div>
+                <img src="Images/Classic/Suit/clubs.png" width="50" height="50" class="trumpbutton"
+                     ng-click="chooseTrump(loginToken, tableId, 'clubs')" />
+                &nbsp;
+                <img src="Images/Classic/Suit/diamonds.png" width="50" height="50" class="trumpbutton"
+                     ng-click="chooseTrump(loginToken, tableId, 'diamonds')" />
+                &nbsp;
+                <img src="Images/Classic/Suit/hearts.png" width="50" height="50" class="trumpbutton"
+                     ng-click="chooseTrump(loginToken, tableId, 'hearts')" />
+                &nbsp;
+                <img src="Images/Classic/Suit/spades.png" width="50" height="50" class="trumpbutton"
+                     ng-click="chooseTrump(loginToken, tableId, 'spades')" />
+                &nbsp;
+            </div>           
+            <table>
+                    <thead>
+                        <th align="center">Your cards</th>
+                    </thead>
+              
+                <tr>
+
+                    <td ng-repeat="card in me.yourcards">
+                        <img src="Images/Classic/Deck/{{ card.cardalias }}.png">
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        <div id="error-dialog" title="Error" style="display:none;">
+            <p>
+                <span style="float:left; margin:0 7px 50px 0;"></span>
+                An Error has occurred.
+            </p>
+            <p>
+                {{errorMessage}}
+            </p>
+        </div>
+        
+        <div class="disable-overlay-layer" ng-show="showOverlay"></div>
+    </body>
+</html>

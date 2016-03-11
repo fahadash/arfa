@@ -1,4 +1,4 @@
-﻿var tableUrl = "http://localhost:46197/api/Table/";
+﻿var tableUrl = serviceUrlBase + "/Table/";
 gameApp.factory('memberFactory', function ($http) {
     var factory = {};
     var makeUrl = function (method) {
@@ -28,7 +28,7 @@ gameApp.factory('memberFactory', function ($http) {
     return factory;
 });
 
-gameApp.controller('MemberController', function($scope, $location, $routeParams, memberFactory) {
+gameApp.controller('MemberController', function ($scope, $location, $routeParams, $rootScope, memberFactory) {
 
     var postError = function(e) {
         if (typeof $scope.errorMessage == 'undefined') {

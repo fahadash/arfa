@@ -1,0 +1,8 @@
+C:\Dev\TC\TC2\Service\PrologInterface\bin\Release\PrologInterface.dll
+C:\Dev\TC\TC2\Service\PrologInterface\bin\Release\PrologInterface.pdb
+C:\Dev\TC\TC2\Service\PrologInterface\bin\Release\amzinet.dll
+C:\Dev\TC\TC2\Service\PrologInterface\bin\Release\TC2.Common.dll
+C:\Dev\TC\TC2\Service\PrologInterface\bin\Release\TC2.Common.pdb
+C:\Dev\TC\TC2\Service\PrologInterface\obj\Release\PrologInterface.csprojResolveAssemblyReference.cache
+C:\Dev\TC\TC2\Service\PrologInterface\obj\Release\PrologInterface.dll
+C:\Dev\TC\TC2\Service\PrologInterface\obj\Release\PrologInterface.pdb

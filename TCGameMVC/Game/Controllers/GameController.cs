@@ -42,7 +42,7 @@ namespace TCGameMVC.Controllers
 
         public ActionResult GameList()
         {
-            List<Game> games = GameService.GetGames();
+            List<DataLayer.Game> games = GameService.GetGames();
 
             List<GameModel> models = new List<GameModel>();
             games.ForEach(g => models.Add(new GameModel()

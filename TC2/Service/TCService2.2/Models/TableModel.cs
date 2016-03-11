@@ -411,9 +411,14 @@ namespace TC2.Models
                         });
 
                 ctx.SubmitChanges();
+
+                if (!ctx.TableUserCards.Any(tuc => tuc.TableUser.TableId == tableId))
+                {
+                    return new { TableFinished = true };
+                }
             }
 
-            return null;
+            return new { TableFinished = false };
         }
 
 
@@ -613,6 +618,8 @@ namespace TC2.Models
                     var users = new[] { new object(), new object(), new object(), new object() };
                     int userNumber = 0;
 
+                    var tableFinished = !ctx.TableUserCards.Any(tuc => tuc.TableUser.TableId == tableId);
+
                     var previousCards =
                         ctx.TableHistories.Where(h => h.TableId.Equals(tableId))
                             .OrderByDescending(o => o.TableHistoryId)
@@ -732,6 +739,7 @@ namespace TC2.Models
                         Owner = user,
                         users = users,
                         handsaccumulated = table.HandsAccumulated,
+                        tableFinished = tableFinished
                     };
 
                     return tableInfo;

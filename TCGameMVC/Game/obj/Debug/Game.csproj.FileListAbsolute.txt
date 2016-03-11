@@ -61,3 +61,10 @@ C:\Dev\TC\TCGameMVC\Game\bin\System.Web.Http.Owin.xml
 C:\Dev\TC\TCGameMVC\Game\obj\Debug\Game.csprojResolveAssemblyReference.cache
 C:\Dev\TC\TCGameMVC\Game\obj\Debug\Game.dll
 C:\Dev\TC\TCGameMVC\Game\obj\Debug\Game.pdb
+C:\Dev\TC\TCGameMVC\Game\bin\DataLayer.dll
+C:\Dev\TC\TCGameMVC\Game\bin\LogicLayer.dll
+C:\Dev\TC\TCGameMVC\Game\bin\Microsoft.ApplicationBlocks.Data.dll
+C:\Dev\TC\TCGameMVC\Game\bin\DataLayer.pdb
+C:\Dev\TC\TCGameMVC\Game\bin\LogicLayer.pdb
+C:\Dev\TC\TCGameMVC\Game\bin\Microsoft.ApplicationBlocks.Data.pdb
+C:\Dev\TC\TCGameMVC\Game\bin\Microsoft.ApplicationBlocks.Data.xml

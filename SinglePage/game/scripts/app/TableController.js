@@ -22,7 +22,7 @@
     return factory;
 });
 
-gameApp.controller('TableController', function ($scope, $location, $routeParams, tableFactory) {
+gameApp.controller('TableController', function ($scope, $location, $routeParams, $rootScope, tableFactory) {
     $scope.showOverlay = false;
 
     var postError = function (e) {
@@ -108,6 +108,19 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
             $scope.trump = game.trump;
             $scope.trumpChosen = game.trumpchosen;
             $scope.currentSuit = game.currentsuit;
+
+            if ((slice[0].cardcount + 
+                slice[1].cardcount +
+                slice[2].cardcount +
+                slice[3].cardcount) == 0 && 
+                (slice[0].gamescore +
+                 slice[1].gamescore +
+                  slice[2].gamescore +
+                  slice[3].gamescore) > 0)
+            {
+                $rootScope.finalPlayers = slice;
+                $location.path("/winner/" + $routeParams.logintoken);
+            }
         });
     };
 

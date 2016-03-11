@@ -1,2 +1,2 @@
 # arfa
-Named after the late child prodigy Arfa Karim Randhwa, Arfa is an AI Card game
+This project is still under development. Check back later.

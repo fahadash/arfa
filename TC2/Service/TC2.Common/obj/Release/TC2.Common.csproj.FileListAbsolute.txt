@@ -2,3 +2,4 @@ C:\Dev\TC\TC2\Service\TC2.Common\bin\Release\TC2.Common.dll
 C:\Dev\TC\TC2\Service\TC2.Common\bin\Release\TC2.Common.pdb
 C:\Dev\TC\TC2\Service\TC2.Common\obj\Release\TC2.Common.dll
 C:\Dev\TC\TC2\Service\TC2.Common\obj\Release\TC2.Common.pdb
+C:\Dev\TC\TC2\Service\TC2.Common\obj\Release\TC2.Common.csprojResolveAssemblyReference.cache

@@ -12,7 +12,7 @@ gameApp.config(function($routeProvider) {
             controller: 'MemberController',
             templateUrl: 'Views/Member.html'
         })
-        .when('/winner/:logintoken',
+        .when('/winner/:logintoken/:tableid',
         {
             controller: 'WinnerController',
             templateUrl: 'Views/Winner.html'

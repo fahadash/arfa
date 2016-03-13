@@ -363,7 +363,7 @@ namespace PrologInterface
                 }
                 else
                 {
-                    execStr = "assert(player_has(1, []))";
+                    execStr = string.Format("assert(player_has({0}, []))", playerNumber);
                 }
 
                 int term = logicServer.ExecStr(execStr);

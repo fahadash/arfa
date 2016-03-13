@@ -52,6 +52,7 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
         if (result.errorcode == "FAIL") {
             showError("Error occured while loading game state: " + result.message);
         } else if (result.errorcode == "INVALIDLOGINTOKEN") {
+            $scope.pollSubscription.dispose();
             $location.path("/login");
         } else if (result.errorcode == "SUCCESS") {
             elseFunction(d);
@@ -109,17 +110,12 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
             $scope.trumpChosen = game.trumpchosen;
             $scope.currentSuit = game.currentsuit;
 
-            if ((slice[0].cardcount + 
-                slice[1].cardcount +
-                slice[2].cardcount +
-                slice[3].cardcount) == 0 && 
-                (slice[0].gamescore +
-                 slice[1].gamescore +
-                  slice[2].gamescore +
-                  slice[3].gamescore) > 0)
+            console.log(game);
+            if (game.tableFinished == true)
             {
                 $rootScope.finalPlayers = slice;
-                $location.path("/winner/" + $routeParams.logintoken);
+                $scope.pollSubscription.dispose();
+                $location.path("/winner/" + $routeParams.logintoken + "/" + $routeParams.tableid);
             }
         });
     };
@@ -166,7 +162,7 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
                 handleResult(d, updateFn);
             },
                 function (d) {
-                    showError("Error occurred while calling server to begin the game.");
+                    showError("Error occurred while calling server to choose Trump.");
                 });
     }
 
@@ -180,17 +176,16 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
                 handleResult(d, updateFn);
             },
                 function (d) {
-                    showError("Error occurred while calling server to begin the game.");
+                    showError("Error occurred while calling server to submit a card.");
                 });
     }
 
     var service = Rx.Observable.defer(function () {
-        console.log("Update the UI");
-        $scope.showOverlay = true;
         return Rx.Observable.fromPromise(tableFactory.getGameState($routeParams.logintoken, $routeParams.tableid));
     });
     var pollInterval = Rx.Observable.empty().delay(5000);
-    service
+    $scope.pollSubscription =
+   service
     .concat(pollInterval)
     .repeat()
     .subscribe(handleUpdateSuccess, handleUpdateError);

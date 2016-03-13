@@ -4,14 +4,24 @@
     <title></title>
 </head>
 <body>
-    This game is finished.
-
-     <div>
-        
-         <div ng-repeat="player in players">
-             {{player.userinfo.username}}'s score: {{player.gamescore}}
+     <div class="panel">
+        <div class="panel-heading panel-title">Finished</div>
+         <div class="panel-body">
+             <div ng-repeat="player in players" class="panel-default">
+                 <div class="visible-lg-block">
+                     {{player.userinfo.username}}'s score: {{player.gamescore}}
+                 </div>
+             </div>
          </div>
      </div>
-
+    <div id="error-dialog" title="Error" style="display:none;">
+        <p>
+            <span style="float:left; margin:0 7px 50px 0;"></span>
+            An Error has occurred.
+        </p>
+        <p>
+            {{errorMessage}}
+        </p>
+    </div>
 </body>
 </html>

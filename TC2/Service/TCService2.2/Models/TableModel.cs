@@ -411,14 +411,15 @@ namespace TC2.Models
                         });
 
                 ctx.SubmitChanges();
-
-                if (!ctx.TableUserCards.Any(tuc => tuc.TableUser.TableId == tableId))
+                
+                if (!ctx.TableUserCards.Any(tuc => tuc.TableUser.TableId == tableId)
+                    && ctx.Tables.Any(t => t.GameStarted == true && t.TableId == tableId))
                 {
-                    return new { TableFinished = true };
+                    return new { tableFinished = true };
                 }
             }
 
-            return new { TableFinished = false };
+            return new { tableFinished = false };
         }
 
 
@@ -618,7 +619,8 @@ namespace TC2.Models
                     var users = new[] { new object(), new object(), new object(), new object() };
                     int userNumber = 0;
 
-                    var tableFinished = !ctx.TableUserCards.Any(tuc => tuc.TableUser.TableId == tableId);
+                    var tableFinished = !ctx.TableUserCards.Any(tuc => tuc.TableUser.TableId == tableId)
+                    && ctx.Tables.Any(t => t.GameStarted == true && t.TableId==tableId);
 
                     var previousCards =
                         ctx.TableHistories.Where(h => h.TableId.Equals(tableId))
@@ -991,6 +993,11 @@ namespace TC2.Models
                     {
                         table.Trump = game.GetTrump().ToString();
                     }
+                    else
+                    {
+                        table.Trump = null;
+                    }
+
 
                     SuitType currentSuit = game.GetCurrentSuit();
 

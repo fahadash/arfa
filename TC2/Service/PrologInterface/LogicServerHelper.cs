@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace PrologInterface
     public class LogicServerHelper
     {
         LogicServer logicServer = new LogicServer();
-        static string xplPath = @"C:\Dev\Amzi\Workspace\TC\bin\TC.xpl";
+        static string xplPath = ConfigurationManager.AppSettings["logicBasePath"].ToString();
 
         public LogicServerHelper()
         {

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="main-interface">
+        <div class="mobile-top-row">
+            <div class="mobile-player-name mobile-player-name-top {{ topPlayer.turn ? 'mobile-turn-player' : ''}}">{{ topPlayer.userinfo.username }} ({{ rightPlayer.gamescore }})</div>
+
+        </div>
+        <div class="mobile-middle-row">
+            <div class="mobile-middle-row-col1">
+                <div class="mobile-player-name mobile-player-name-left {{ leftPlayer.turn ? 'mobile-turn-player' : ''}}">{{ leftPlayer.userinfo.username }} ({{ leftPlayer.gamescore }})</div>
+            </div>
+            <div class="mobile-middle-row-col2">
+                
+                <div ng-show="topPlayer.currentcard != null" id="topCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ topPlayer.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
+
+                </div>
+
+                <div ng-show="leftPlayer.currentcard != null" id="leftCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ leftPlayer.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
+
+                </div>
+
+
+                <div ng-show="rightPlayer.currentcard != null" id="rightCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ rightPlayer.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
+
+                </div>
+
+
+                <div  id="bottomCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ me.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
+
+                </div>
+
+            </div>
+            <div class="mobile-middle-row-col3">
+
+                <div class="mobile-player-name mobile-player-name-right {{ rightPlayer.turn ? 'mobile-turn-player' : ''}}">{{ rightPlayer.userinfo.username }} ({{ rightPlayer.gamescore }})</div>
+            </div>
+        </div>
+        <div class="mobile-middle2-row">
+            <div class="mobile-turn-accumulated" ng-show="handsAccumulated > 0">
+                <span style="font-size:10px;">+</span> {{ handsAccumulated }}
+            </div>
+            <div class="mobile-player-name mobile-player-name-bottom {{ me.turn ? 'mobile-turn-player' : ''}}">{{ me.userinfo.username }} ({{ me.gamescore }})</div>
+        </div>
+        <div class="mobile-bottom-row">
+            <div style="overflow-x: auto; height:100%; display:flex;">
+                <div ng-repeat="card in me.yourcards"
+                     ng-click="submitCard(loginToken, tableId,  card.cardalias)"
+                     style="flex:1; min-width: 50px; min-height: 50px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Deck/{{ card.cardalias }}.png)">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    function adjustCards() {
+        var topCard = $("#topCard");
+        var leftCard = $("#leftCard");
+        var rightCard = $("#rightCard");
+        var bottomCard = $("#bottomCard");
+        var parent = topCard.parent();
+        var parentOffset = parent.offset();
+        var cardHeight = (parent.height() * 50) / 100;
+        var cardWidth = parent.width() * 50 / 100;
+        var xFactor = parent.width() * 30 / 100;
+        var yFactor = parent.height() * 20 / 100;
+
+        var centerCardPosition =
+            {
+                left: parent.width() / 2 + parentOffset.left - cardWidth / 2,
+                top: parent.height() / 2 + parentOffset.top - cardHeight / 2
+            };
+
+        $(".card-pane")
+            .height(cardHeight)
+            .width(cardWidth);
+        
+        topCard.offset({ left: centerCardPosition.left, top: centerCardPosition.top - yFactor });
+        leftCard.offset({ left: centerCardPosition.left - xFactor, top: centerCardPosition.top });
+
+
+        rightCard.offset({ left: centerCardPosition.left + xFactor, top: centerCardPosition.top });
+        bottomCard.offset({ left: centerCardPosition.left, top: centerCardPosition.top  + yFactor});
+    }
+    $(function () {
+        $(document).ready(function () {
+            setTimeout(adjustCards, 500);
+        });
+        $(window).resize(function () {
+            setTimeout(adjustCards, 500);
+        });
+    });
+</script>

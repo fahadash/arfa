@@ -129,6 +129,8 @@ namespace TC2.Models
 
                 if (time.TotalMinutes <= 15)
                 {
+                    u.TokenLastHit = DateTime.Now;
+                    ctx.SubmitChanges();
                     return new UserModel
                     {
                         UserId = u.UserId,

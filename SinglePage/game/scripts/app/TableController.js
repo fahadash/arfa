@@ -113,9 +113,13 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
             console.log(game);
             if (game.tableFinished == true)
             {
-                $rootScope.finalPlayers = slice;
-                $scope.pollSubscription.dispose();
-                $location.path("/winner/" + $routeParams.logintoken + "/" + $routeParams.tableid);
+                //$rootScope.finalPlayers = slice;
+                //$scope.pollSubscription.dispose();
+                //$location.path("/winner/" + $routeParams.logintoken + "/" + $routeParams.tableid);
+            }
+
+            if (typeof (adjustCards) == "function") {
+                adjustCards();
             }
         });
     };

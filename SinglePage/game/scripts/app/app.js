@@ -20,7 +20,7 @@ gameApp.config(function($routeProvider) {
         .when('/table/:logintoken/:tableid',
         {
             controller: 'TableController',
-            templateUrl: 'Views/Table.html'
+            templateUrl: 'Views/TableMobile.html'
         })
         .otherwise({ redirectTo: '/' });
 });

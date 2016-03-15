@@ -93,3 +93,122 @@ img.trumpbutton:hover {
 {
     width:60%
 }
+
+
+
+.table2-table-cell {
+    height:100%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+.main-interface {
+    height:100%;
+    width:100%;
+    background-color: #50A35B;
+}
+
+
+.mobile-top-row {
+    height:18%;
+    width:100%;
+    /*background-color: #B6B1E3;*/
+}
+
+.mobile-middle-row {
+    height:40%;
+    width:100%;
+    /*background-color: #3C329C;*/
+    display:flex;
+}
+
+
+.mobile-middle-row-col1 {
+    flex:1;
+    padding:item;
+    height:100%;
+    width:25%;
+    /*background-color: #CC66A7;*/ 
+}
+.mobile-middle-row-col2 {
+    flex:2;
+    padding:item;
+    height:100%;
+    width:50%;
+    text-align:center;
+    vertical-align:middle;
+    
+    /*background-color: #CC66A7;*/
+    
+}
+.mobile-middle-row-col3 {
+    flex:1;
+    padding:item;
+    height:100%;
+    width:25%;
+    /*background-color: #CC66A7;*/
+}
+
+.mobile-middle2-row {
+    height:18%;
+    width:100%;
+    /*background-color: #97BD66;*/
+}
+
+.mobile-bottom-row {
+    height:26%;
+    width:100%;
+    background-color: #50A35B;
+}
+
+.mobile-player-name {
+    text-shadow:3px 2px 0 rgba(0,0,0,1);
+    font-weight:bold;
+    color:#FFFFFF;
+    letter-spacing:2pt;
+    font-size:20px;
+    font-family:verdana, sans-serif;
+}
+
+.mobile-player-name-top {
+    text-align:center;
+    vertical-align: bottom;
+}
+
+.mobile-player-name-left {
+    font-size: 12px;
+    text-align:center;
+    vertical-align: top;
+    text-wrap: normal;
+    overflow-wrap: break-word;
+}
+
+.mobile-player-name-right {
+    font-size: 12px;
+    text-align:center;
+    vertical-align: top;
+    text-wrap: normal;
+    overflow-wrap: break-word;
+}
+
+.mobile-player-name-bottom {
+    text-align:center;
+    vertical-align: top;
+    text-wrap: normal;
+    overflow-wrap: break-word;
+}
+
+.mobile-turn-player {
+    text-shadow:3px 2px 0 rgba(237,232,97,1);
+}
+
+.mobile-turn-accumulated {
+    text-shadow:1px 1px 0 rgba(255,255,255,1);font-weight:bold;color:#030BFF;letter-spacing:1px;font-size:22px;text-align:center;font-family:arial, helvetica, sans-serif;line-height:2px;
+    vertical-align: top;
+    text-align: center;    
+}

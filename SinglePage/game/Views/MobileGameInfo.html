@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="main-interface">
+        <div style="margin-bottom: 10px;">
+            <a href="#/table/{{loginToken}}/{{tableId}}">&lt;&lt; Back to game</a>
+        </div>
+        <div>
+            <span>Trump symbol: </span>
+            <span> <img src="Images/Classic/Suit/{{trump}}.png" width="20" height="20" /></span>
+        </div>
+
+        <div>
+            <span>Current symbol: </span>
+            <span> <img src="Images/Classic/Suit/{{currentSuit}}.png" width="20" height="20" /></span>
+        </div>
+        <div>
+            <div>Last hand</div>
+            <div style="display:flex;width:100%; text-align:center;">
+                <div style="flex:1;" ng-show="topPlayer.previouscard != null">
+                    <div>{{ topPlayer.userinfo.username }}</div>
+                    <div>
+                        <img src="Images/Classic/Deck/{{ topPlayer.previouscard.cardalias }}.png" width="50"
+                             height="74" />
+                    </div>
+                </div>
+                <div style="flex:1;" ng-show="leftPlayer.previouscard != null">
+                    <div>{{ leftPlayer.userinfo.username }}</div>
+                    <div>
+                        <img src="Images/Classic/Deck/{{ leftPlayer.previouscard.cardalias }}.png" width="50"
+                             height="74" />
+                    </div>
+                </div>
+
+
+                <div style="flex:1;" ng-show="rightPlayer.previouscard != null">
+                    <div>{{ rightPlayer.userinfo.username }}</div>
+                    <div>
+                        <img src="Images/Classic/Deck/{{ rightPlayer.previouscard.cardalias }}.png" width="50"
+                             height="74" />
+                    </div>
+                </div>
+                <div style="flex:1;" ng-show="me.previouscard != null">
+                    <div>{{ me.userinfo.username }} (You)</div>
+                    <div>
+                        <img src="Images/Classic/Deck/{{ me.previouscard.cardalias }}.png" width="50"
+                             height="74" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

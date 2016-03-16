@@ -5,56 +5,95 @@
 </head>
 <body>
     <div class="main-interface">
-        <div class="mobile-top-row">
-            <div class="mobile-player-name mobile-player-name-top {{ topPlayer.turn ? 'mobile-turn-player' : ''}}">{{ topPlayer.userinfo.username }} ({{ rightPlayer.gamescore }})</div>
-
-        </div>
-        <div class="mobile-middle-row">
-            <div class="mobile-middle-row-col1">
-                <div class="mobile-player-name mobile-player-name-left {{ leftPlayer.turn ? 'mobile-turn-player' : ''}}">{{ leftPlayer.userinfo.username }} ({{ leftPlayer.gamescore }})</div>
-            </div>
-            <div class="mobile-middle-row-col2">
-                
-                <div ng-show="topPlayer.currentcard != null" id="topCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ topPlayer.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
-
-                </div>
-
-                <div ng-show="leftPlayer.currentcard != null" id="leftCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ leftPlayer.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
-
-                </div>
-
-
-                <div ng-show="rightPlayer.currentcard != null" id="rightCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ rightPlayer.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
-
-                </div>
-
-
-                <div  id="bottomCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ me.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
-
-                </div>
-
-            </div>
-            <div class="mobile-middle-row-col3">
-
-                <div class="mobile-player-name mobile-player-name-right {{ rightPlayer.turn ? 'mobile-turn-player' : ''}}">{{ rightPlayer.userinfo.username }} ({{ rightPlayer.gamescore }})</div>
+        <div ng-show="!gameStarted">
+            Game not started
+            <div>
+                <a href="#">Start Game</a>
             </div>
         </div>
-        <div class="mobile-middle2-row">
-            <div class="mobile-turn-accumulated" ng-show="handsAccumulated > 0">
-                <span style="font-size:10px;">+</span> {{ handsAccumulated }}
+
+        <div class="mobile-choose-trump-pane" ng-show="gameStarted && hasToChooseTrump">
+            <div class="mobile-choose-trump-text">
+                Please choose a trump symbol.
             </div>
-            <div class="mobile-player-name mobile-player-name-bottom {{ me.turn ? 'mobile-turn-player' : ''}}">{{ me.userinfo.username }} ({{ me.gamescore }})</div>
+            <div style="display:flex; text-align: center; width:100%;">
+                <div style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/clubs.png); margin: 2px;">
+                </div>
+
+
+                <div style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/spades.png); margin: 2px;">
+                </div>
+
+
+                <div style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/hearts.png); margin: 2px;">
+                </div>
+
+
+                <div style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/diamonds.png); margin: 2px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-when-trump-chosen" ng-show="gameStarted && !hasToChooseTrump">
+
+            <div class="mobile-top-row">
+                <div class="mobile-player-name mobile-player-name-top {{ topPlayer.turn ? 'mobile-turn-player' : ''}}">{{ topPlayer.userinfo.username }} ({{ rightPlayer.gamescore }})</div>
+
+            </div>
+            <div class="mobile-middle-row">
+                <div class="mobile-middle-row-col1">
+                    <div class="mobile-player-name mobile-player-name-left {{ leftPlayer.turn ? 'mobile-turn-player' : ''}}">{{ leftPlayer.userinfo.username }} ({{ leftPlayer.gamescore }})</div>
+                </div>
+                <div class="mobile-middle-row-col2">
+
+                    <div ng-show="topPlayer.currentcard != null" id="topCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ topPlayer.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
+
+                    </div>
+
+                    <div ng-show="leftPlayer.currentcard != null" id="leftCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ leftPlayer.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
+
+                    </div>
+
+
+                    <div ng-show="rightPlayer.currentcard != null" id="rightCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ rightPlayer.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
+
+                    </div>
+
+
+                    <div id="bottomCard" class="card-pane" style="background-image: url(Images/Classic/Deck/{{ me.currentcard.cardalias }}.png); background-repeat:no-repeat; background-position:center; background-size:contain; ">
+
+                    </div>
+
+                </div>
+                <div class="mobile-middle-row-col3">
+
+                    <div class="mobile-player-name mobile-player-name-right {{ rightPlayer.turn ? 'mobile-turn-player' : ''}}">{{ rightPlayer.userinfo.username }} ({{ rightPlayer.gamescore }})</div>
+                </div>
+            </div>
+            <div class="mobile-middle2-row">
+                <div class="mobile-turn-accumulated" ng-show="handsAccumulated > 0">
+                    <span style="font-size:10px;">+</span> {{ handsAccumulated }}
+                </div>
+                <div class="mobile-player-name mobile-player-name-bottom {{ me.turn ? 'mobile-turn-player' : ''}}">{{ me.userinfo.username }} ({{ me.gamescore }})</div>
+
+                <div style="width:100%;text-align:center;">
+                    <a href="#/tableinfo/{{loginToken}}/{{tableId}}" >Game Info</a>
+                </div>
+            </div>
+
         </div>
         <div class="mobile-bottom-row">
             <div style="overflow-x: auto; height:100%; display:flex;">
                 <div ng-repeat="card in me.yourcards"
                      ng-click="submitCard(loginToken, tableId,  card.cardalias)"
-                     style="flex:1; min-width: 50px; min-height: 50px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Deck/{{ card.cardalias }}.png)">
+                     style="margin-left: 2px; margin-right: 2px; flex:1; min-width: 50px; min-height: 50px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Deck/{{ card.cardalias }}.png)">
 
                 </div>
             </div>
         </div>
     </div>
+
+    
 </body>
 </html>
 <script type="text/javascript">
@@ -94,5 +133,9 @@
         $(window).resize(function () {
             setTimeout(adjustCards, 500);
         });
+
+        //$("#infoPopupOpener").click(function () {
+        //    $("#infoPopup").popup();
+        //});
     });
 </script>

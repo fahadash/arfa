@@ -163,6 +163,7 @@ img.trumpbutton:hover {
 .mobile-bottom-row {
     height:26%;
     width:100%;
+    vertical-align: top;
     background-color: #50A35B;
 }
 
@@ -211,4 +212,24 @@ img.trumpbutton:hover {
     text-shadow:1px 1px 0 rgba(255,255,255,1);font-weight:bold;color:#030BFF;letter-spacing:1px;font-size:22px;text-align:center;font-family:arial, helvetica, sans-serif;line-height:2px;
     vertical-align: top;
     text-align: center;    
+}
+
+.mobile-when-trump-chosen {
+    height:70%;
+    width:100%;
+}
+
+.mobile-choose-trump-pane {
+    width:100%;
+}
+
+.mobile-choose-trump-text {
+    text-shadow:3px 2px 0 rgba(0,0,0,1);
+    font-weight:bold;
+    color:#FFFFFF;
+    letter-spacing:2pt;
+    font-size:20px;
+    font-family:verdana, sans-serif;
+    text-align:center;
+    vertical-align: bottom;
 }

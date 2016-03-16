@@ -46,13 +46,17 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
             }
         });
     }
+    $scope.$on("$destroy", function () {
+        if ($scope.pollSubscription) {
+            $scope.pollSubscription.dispose();
+        }
+    });
 
     var handleResult = function (d, elseFunction) {
         var result = d.data.result;
         if (result.errorcode == "FAIL") {
             showError("Error occured while loading game state: " + result.message);
         } else if (result.errorcode == "INVALIDLOGINTOKEN") {
-            $scope.pollSubscription.dispose();
             $location.path("/login");
         } else if (result.errorcode == "SUCCESS") {
             elseFunction(d);

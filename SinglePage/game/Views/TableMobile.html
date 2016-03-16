@@ -7,8 +7,8 @@
     <div class="main-interface">
         <div ng-show="!gameStarted">
             Game not started
-            <div>
-                <a href="#">Start Game</a>
+            <div ng-show="iAmOwner">
+                <a  ng-click="startGame(loginToken, gameId);">Start Game</a>
             </div>
         </div>
 
@@ -17,19 +17,20 @@
                 Please choose a trump symbol.
             </div>
             <div style="display:flex; text-align: center; width:100%;">
-                <div style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/clubs.png); margin: 2px;">
+                <div ng-click="chooseTrump(loginToken, tableId, 'clubs')"
+                     style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/clubs.png); margin: 2px;">
                 </div>
 
 
-                <div style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/spades.png); margin: 2px;">
+                <div ng-click="chooseTrump(loginToken, tableId, 'spades')" style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/spades.png); margin: 2px;">
                 </div>
 
 
-                <div style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/hearts.png); margin: 2px;">
+                <div ng-click="chooseTrump(loginToken, tableId, 'hearts')" style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/hearts.png); margin: 2px;">
                 </div>
 
 
-                <div style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/diamonds.png); margin: 2px;">
+                <div ng-click="chooseTrump(loginToken, tableId, 'diamonds')" style="flex:1; min-width: 80px; min-height: 80px; background-position: center; background-size: contain; background-repeat: no-repeat; background-image: url(Images/Classic/Suit/diamonds.png); margin: 2px;">
                 </div>
             </div>
         </div>

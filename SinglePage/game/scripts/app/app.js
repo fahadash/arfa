@@ -4,7 +4,7 @@
     return check;
 };
 
-var mobileEnabled = window.mobilecheck() || navigator.userAgent.match(/iPad/i);
+var mobileEnabled = window.mobilecheck();
 var tableTemplateUrl = mobileEnabled ? 'TableMobile.html' : 'Table.html';
 console.log(tableTemplateUrl);
 

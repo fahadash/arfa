@@ -13,7 +13,7 @@
             <span> <img src="Images/Classic/Suit/{{trump}}.png" width="20" height="20" /></span>
         </div>
 
-        <div>
+        <div ng-show="typeof(currentSuit) != 'undefined' && currentSuit.length > 0">
             <span>Current symbol: </span>
             <span> <img src="Images/Classic/Suit/{{currentSuit}}.png" width="20" height="20" /></span>
         </div>

@@ -156,4 +156,10 @@ gameApp.controller('MemberController', function ($scope, $location, $routeParams
                 });
 
     };
+
+    arfaChannel.tableAdded = function (tableId, tableName) {
+        console.log("Table  Added");
+        $scope.gamesToJoin.push({ TableId: tableId, TableName: tableName, AvailableSlots: 3 });
+        $scope.$apply();
+    };
 });

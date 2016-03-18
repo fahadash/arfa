@@ -24,7 +24,9 @@
     <script type="text/javascript" src="scripts/app/MemberController.js"></script>
     <script type="text/javascript" src="scripts/app/WinnerController.js"></script>
     <script type="text/javascript" src="scripts/app/TableController.js"></script>
-
+    <script type="text/javascript" src="scripts/signalr/jquery.signalR-2.2.0.min.js"></script>
+    
+    <script type="text/javascript" src="http://localhost:46197/signalr/hubs"></script>
 </head>
 <body>
 
@@ -36,5 +38,24 @@
         
 
     <script type="text/javascript" src="js/bootstrap.js"></script>
+
+    <script type="text/javascript">
+        window.arfaChannel = {};
+
+        $(function () {
+            var arfaHub = $.connection.arfaHub;
+            
+            arfaHub.client.tableAdded = function (tableId, tableName) {
+                if (typeof (arfaChannel.tableAdded != "undefined")) {
+                    arfaChannel.tableAdded(tableId, tableName);
+                }
+            };
+
+            $.connection.hub.url = "http://localhost:46197/signalr";
+            $.connection.hub.start().done(function () {
+                console.log("Arfa Hub Started");
+            });
+        });
+    </script>
 </body>
 </html>

@@ -7,6 +7,7 @@ using System.Web.Http;
 using TC2.Common.Exceptions;
 using TC2.Models;
 using TC2.Common.Util;
+using TCService2._2.SignalR;
 
 namespace TC2.Controllers
 {
@@ -146,7 +147,7 @@ namespace TC2.Controllers
                 throw new ApplicationException("Invalid model state");
             }
 
-            object table = null;
+            TableModel table = null;
             try
             {
                 ValidateCreateParams(par);
@@ -167,6 +168,8 @@ namespace TC2.Controllers
             {
                 return new { result = ResultObject("FAILED", e.Message), response = new {  } };
             }
+
+            ArfaInterface.TableAdded(table.TableId, table.TableName);
 
             return new { result = ResultObject("SUCCESS", string.Empty), response = table };
 

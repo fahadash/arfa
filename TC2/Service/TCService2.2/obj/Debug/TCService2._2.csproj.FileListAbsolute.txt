@@ -92,3 +92,17 @@ C:\Dev\TC\TC2\Service\TCService2.2\bin\System.Xml.Linq.dll
 C:\Dev\TC\TC2\Service\TCService2.2\bin\System.Net.Http.Formatting.xml
 C:\Dev\TC\TC2\Service\TCService2.2\bin\System.Web.Http.xml
 C:\Dev\TC\TC2\Service\TCService2.2\bin\System.Web.Http.WebHost.xml
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.Owin.dll
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.Owin.Security.dll
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Owin.dll
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.Owin.xml
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.Owin.Security.xml
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.Owin.Cors.dll
+C:\Dev\TC\TC2\Service\TCService2.2\bin\System.Web.Cors.dll
+C:\Dev\TC\TC2\Service\TCService2.2\bin\Microsoft.Owin.Cors.xml

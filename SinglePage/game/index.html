@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="jquery/ui/jquery-ui.theme.min.css" />
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    
+
+    <link href="css/toastr.min.css" rel="stylesheet" />
 
     <script type="text/javascript" src="jquery/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="jquery/ui/jquery-ui.min.js"></script>
-
+    <script type="text/javascript" src="js/toastr.min.js"></script>
 
     <script type="text/javascript" src="scripts/angular.min.js"></script>
     <script type="text/javascript" src="scripts/angular-route.min.js"></script>
@@ -40,20 +41,52 @@
     <script type="text/javascript" src="js/bootstrap.js"></script>
 
     <script type="text/javascript">
-        window.arfaChannel = {};
+        window.arfaChannel = { isConnected: false};
 
         $(function () {
             var arfaHub = $.connection.arfaHub;
             
+            arfaChannel.submitUserCard = function (loginToken, tableId, cardAlias) {
+                return arfaHub.server.submitUserCard(loginToken, tableId, cardAlias);
+            };
+
+            arfaChannel.userJoinsTable = function (tableId) {
+
+                setTimeout(function () {
+                    arfaHub.server.userJoinsTable(tableId);
+                }, 500);
+                
+            }
+            
+            arfaChannel.userPartsTable = function (tableId) {
+                arfaHub.server.userPartsTable(tableId);
+            }
+
             arfaHub.client.tableAdded = function (tableId, tableName) {
                 if (typeof (arfaChannel.tableAdded != "undefined")) {
-                    arfaChannel.tableAdded(tableId, tableName);
+                    setTimeout(function () {
+                        arfaChannel.tableAdded(tableId, tableName);
+                    }, 500);
+                }
+            };
+
+            arfaHub.client.playerPuts = function (userName, cardAlias) {
+                toastr.info(userName + " has put a " + cardAlias);
+                if (typeof (arfaChannel.playerPuts != "undefined")) {
+                    arfaChannel.playerPuts(userName, cardAlias);
                 }
             };
 
             $.connection.hub.url = "http://localhost:46197/signalr";
+            $.connection.hub.disconnected(function () {
+                toastr.warning("Disconnected from server");
+                arfaChannel.isConnected = false;
+            });
+
             $.connection.hub.start().done(function () {
                 console.log("Arfa Hub Started");
+                toastr.info("Connection to server established");
+                arfaChannel.isConnected = true;
             });
         });
     </script>

@@ -61,6 +61,8 @@
     <Folder Include="Keys" />
     <Folder Include="StoredProcedures" />
     <Folder Include="Functions" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Card.sql" />
@@ -88,6 +90,7 @@
     <Build Include="StoredProcedures\usp_GetTableTimestamp.sql" />
     <Build Include="Tables\TableUserCard.sql" />
     <Build Include="StoredProcedures\usp_ListTablesUserIsOn.sql" />
+    <Build Include="dbo\Tables\TableHistory.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TC2.refactorlog" />

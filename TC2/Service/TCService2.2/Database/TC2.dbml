@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TC2" Class="TC2DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=(local)\SQLEXPRESS;Initial Catalog=TC2;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="TC2ConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(local);Initial Catalog=TC2;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="TC2ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Card" Member="Cards">
     <Type Name="Card">
       <Column Name="CardId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -63,9 +63,9 @@
       <Association Name="User_GameScore" Member="GameScores" ThisKey="UserId" OtherKey="UserId" Type="GameScore" />
       <Association Name="User_TableState" Member="TableStates" ThisKey="UserId" OtherKey="UserId" Type="TableState" />
       <Association Name="User_TableUser" Member="TableUsers" ThisKey="UserId" OtherKey="UserId" Type="TableUser" />
+      <Association Name="User_TableHistory" Member="TableHistories" ThisKey="UserId" OtherKey="UserId" Type="TableHistory" />
       <Association Name="User_Table" Member="Tables" ThisKey="UserId" OtherKey="LastWinnerUserId" Type="Table" />
       <Association Name="User_Table1" Member="Tables1" ThisKey="UserId" OtherKey="OwnerUserId" Type="Table" />
-      <Association Name="User_TableHistory" Member="TableHistories" ThisKey="UserId" OtherKey="UserId" Type="TableHistory" />
     </Type>
   </Table>
   <Table Name="dbo.TableUserCard" Member="TableUserCards">
@@ -89,6 +89,17 @@
       <Association Name="Table_TableUser" Member="Table" ThisKey="TableId" OtherKey="TableId" Type="Table" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.TableHistory" Member="TableHistories">
+    <Type Name="TableHistory">
+      <Column Name="TableHistoryId" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TableId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CardId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Card_TableHistory" Member="Card" ThisKey="CardId" OtherKey="CardId" Type="Card" IsForeignKey="true" />
+      <Association Name="User_TableHistory" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
+      <Association Name="Table_TableHistory" Member="Table" ThisKey="TableId" OtherKey="TableId" Type="Table" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.[Table]" Member="Tables">
     <Type Name="Table">
       <Column Name="TableId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -104,6 +115,7 @@
       <Column Name="TurnStart" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="LastWinnerUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LastWinnerTimestamp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TrumpChooser" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Table_UserTableInventory" Member="UserTableInventories" ThisKey="TableId" OtherKey="TableId" Type="UserTableInventory" />
       <Association Name="Table_GameResult" Member="GameResults" ThisKey="TableId" OtherKey="TableId" Type="GameResult" />
       <Association Name="Table_GameScore" Member="GameScores" ThisKey="TableId" OtherKey="TableId" Type="GameScore" />
@@ -112,17 +124,6 @@
       <Association Name="Table_TableHistory" Member="TableHistories" ThisKey="TableId" OtherKey="TableId" Type="TableHistory" />
       <Association Name="User_Table" Member="User" ThisKey="LastWinnerUserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
       <Association Name="User_Table1" Member="User1" ThisKey="OwnerUserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TableHistory" Member="TableHistories">
-    <Type Name="TableHistory">
-      <Column Name="TableHistoryId" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TableId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CardId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Card_TableHistory" Member="Card" ThisKey="CardId" OtherKey="CardId" Type="Card" IsForeignKey="true" />
-      <Association Name="Table_TableHistory" Member="Table" ThisKey="TableId" OtherKey="TableId" Type="Table" IsForeignKey="true" />
-      <Association Name="User_TableHistory" Member="User" ThisKey="UserId" OtherKey="UserId" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.usp_RegisterUser" Method="RegisterUser">

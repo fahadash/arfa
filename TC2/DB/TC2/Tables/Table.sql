@@ -13,5 +13,6 @@
     [TurnStart] BIT NOT NULL DEFAULT 1, 
     [LastWinnerUserId] INT NULL, 
     [LastWinnerTimestamp] DATETIME NULL, 
+	[TrumpChooser] INT NULL,
     CONSTRAINT [FK_Table_User1] FOREIGN KEY ([LastWinnerUserId]) REFERENCES [User]([UserId]) 
 )

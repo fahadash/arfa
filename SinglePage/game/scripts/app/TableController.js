@@ -1,4 +1,4 @@
-﻿gameApp.factory('tableFactory', function ($http) {
+﻿gameApp.factory('tableFactory', function ($http, $q) {
     var factory = {};
     var makeUrl = function (method) {
         return tableUrl + method + "/";
@@ -17,7 +17,21 @@
     }
 
     factory.submitCard = function (token, tableId, card) {
-        return $http.post(makeUrl("SubmitUserCard"), { logintoken: token, tableid: tableId, cardalias: card });
+        if (arfaChannel.isConnected) {
+            return $q(function (resolve, reject) {
+                try {
+                var result = arfaChannel.submitUserCard(token, tableId, card);
+                resolve(result);
+                }
+                catch (ex) 
+                {
+                    reject(ex);
+                }
+            });
+        }
+        else {
+            return $http.post(makeUrl("SubmitUserCard"), { logintoken: token, tableid: tableId, cardalias: card });
+        }
     }
     return factory;
 });
@@ -46,14 +60,53 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
             }
         });
     }
+
+    if (typeof (arfaChannel.userJoinsTable) != "undefined") {
+        arfaChannel.userJoinsTable($routeParams.tableid);
+    }
+
     $scope.$on("$destroy", function () {
         if ($scope.pollSubscription) {
             $scope.pollSubscription.dispose();
         }
+
+        if (typeof (arfaChannel.userPartsTable) != "undefined") {
+            arfaChannel.userPartsTable($routeParams.tableid);
+        }
     });
 
+    arfaChannel.playerPuts = function (userName, cardAlias) {
+        var user = null;
+
+        var isPlayer = function (player, userName) {
+            if (typeof (player.userinfo) != "undefined" && player.userinfo != null && player.userinfo.username == userName) {
+                return true;
+            }
+            return false;
+        };
+
+        if (isPlayer($scope.topPlayer, userName)) {
+            user = $scope.topPlayer;
+        }
+        else if (isPlayer($scope.leftPlayer, userName)) {
+            user = $scope.leftPlayer;
+        }
+        else if (isPlayer($scope.rightPlayer, userName)) {
+            user = $scope.rightPlayer;
+        }
+        else if (isPlayer($scope.me, userName)) {
+            user = $scope.me;
+        }
+
+        if (user != null) {
+            user.currentcard = { cardalias: cardAlias };
+            user.turn = false;
+            $scope.$apply();
+        }
+    };
+
     var handleResult = function (d, elseFunction) {
-        var result = d.data.result;
+        var result = (typeof(d.data) != "undefined")? d.data.result : d.result;
         if (result.errorcode == "FAIL") {
             showError("Error occured while loading game state: " + result.message);
         } else if (result.errorcode == "INVALIDLOGINTOKEN") {
@@ -92,7 +145,6 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
                 slice.push(game.users[j]);
             }
 
-            console.log(slice);
 
             $scope.me = slice[0];
             $scope.leftPlayer = slice[1];
@@ -114,7 +166,6 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
             $scope.trumpChosen = game.trumpchosen;
             $scope.currentSuit = game.currentsuit;
 
-            console.log(game);
             if (game.tableFinished == true)
             {
                 //$rootScope.finalPlayers = slice;
@@ -139,7 +190,6 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
         
         updateObservable
             .subscribe(function(d) {
-                console.log(d);
                 handleUpdateSuccess(d);
                 
             }, handleUpdateError);
@@ -166,7 +216,6 @@ gameApp.controller('TableController', function ($scope, $location, $routeParams,
 
         ob
             .subscribe(function (d) {
-                console.log(d);
                 handleResult(d, updateFn);
             },
                 function (d) {

@@ -898,6 +898,20 @@ namespace TC2.Models
                     Table table = ctx.Tables.Where(t => t.TableId.Equals(tableId)).FirstOrDefault();
                     int dominantPlayer = game.GetDominantPlayer(), turnPlayer = game.GetTurnPlayer();
 
+                    if (game.GetReshufflingOccurred() == true)
+                    {
+                        if (table.TrumpChooser == null)
+                        {
+                            table.TrumpChooser = turnPlayer;
+                        }
+                        else
+                        {
+                            table.TrumpChooser++;
+                        }
+
+                        turnPlayer = table.TrumpChooser.Value;
+                    }
+
                     var players = from tableUser in ctx.TableUsers
                                   where tableUser.TableId.Equals(tableId)
                                   orderby tableUser.TableUserId

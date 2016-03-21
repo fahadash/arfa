@@ -29,6 +29,6 @@ AS
 	FROM [Table]
 	INNER JOIN [User] ON [Table].OwnerUserId = [User].UserId
 
-	WHERE OwnerUserId <> @UserId AND (SELECT COUNT(*) FROM TableUser WHERE TableUser.TableId = [Table].TableId) < 3 AND Suspended = 0
+	WHERE OwnerUserId <> @UserId AND (SELECT COUNT(*) FROM TableUser WHERE TableUser.TableId = [Table].TableId) < 4 AND Suspended = 0
 
 RETURN 0

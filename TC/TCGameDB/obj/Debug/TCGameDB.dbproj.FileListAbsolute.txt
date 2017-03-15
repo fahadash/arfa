@@ -1,8 +1,0 @@
-C:\dev\TC\TC\TCGameDB\sql\debug\TCGameDB_Script.PreDeployment.sql
-C:\dev\TC\TC\TCGameDB\sql\debug\TCGameDB_Script.PostDeployment.sql
-C:\dev\TC\TC\TCGameDB\sql\debug\TCGameDB_Database.sqlsettings
-C:\dev\TC\TC\TCGameDB\sql\debug\TCGameDB_Database.sqldeployment
-C:\dev\TC\TC\TCGameDB\sql\debug\TCGameDB_Database.sqlcmdvars
-C:\dev\TC\TC\TCGameDB\sql\debug\TCGameDB.deploymanifest
-C:\dev\TC\TC\TCGameDB\sql\debug\TCGameDB.dbschema
-C:\dev\TC\TC\TCGameDB\obj\Debug\TCGameDB.dbschema

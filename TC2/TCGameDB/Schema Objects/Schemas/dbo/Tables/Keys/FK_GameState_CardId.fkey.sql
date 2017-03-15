@@ -1,3 +1,0 @@
-﻿ALTER TABLE [dbo].[GameState]
-    ADD CONSTRAINT [FK_GameState_CardId] FOREIGN KEY ([CardId]) REFERENCES [dbo].[Card] ([CardId]) ON DELETE NO ACTION ON UPDATE NO ACTION;
-

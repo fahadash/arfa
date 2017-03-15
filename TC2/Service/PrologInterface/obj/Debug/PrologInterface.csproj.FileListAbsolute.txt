@@ -1,8 +1,0 @@
-C:\Dev\TC\TC2\Service\PrologInterface\bin\Debug\PrologInterface.dll
-C:\Dev\TC\TC2\Service\PrologInterface\bin\Debug\PrologInterface.pdb
-C:\Dev\TC\TC2\Service\PrologInterface\bin\Debug\amzinet.dll
-C:\Dev\TC\TC2\Service\PrologInterface\bin\Debug\TC2.Common.dll
-C:\Dev\TC\TC2\Service\PrologInterface\bin\Debug\TC2.Common.pdb
-C:\Dev\TC\TC2\Service\PrologInterface\obj\Debug\PrologInterface.csprojResolveAssemblyReference.cache
-C:\Dev\TC\TC2\Service\PrologInterface\obj\Debug\PrologInterface.dll
-C:\Dev\TC\TC2\Service\PrologInterface\obj\Debug\PrologInterface.pdb

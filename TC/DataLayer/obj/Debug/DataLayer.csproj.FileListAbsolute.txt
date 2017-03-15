@@ -1,9 +1,0 @@
-C:\dev\TC\TC\DataLayer\bin\Debug\DataLayer.dll
-C:\dev\TC\TC\DataLayer\bin\Debug\DataLayer.pdb
-C:\dev\TC\TC\DataLayer\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
-C:\dev\TC\TC\DataLayer\bin\Debug\Microsoft.ApplicationBlocks.Data.pdb
-C:\dev\TC\TC\DataLayer\bin\Debug\Microsoft.ApplicationBlocks.Data.xml
-C:\dev\TC\TC\DataLayer\obj\Debug\DataLayer.dll
-C:\dev\TC\TC\DataLayer\obj\Debug\DataLayer.pdb
-C:\dev\TC\TC\DataLayer\bin\Debug\DataLayer.dll.config
-C:\Dev\TC\TC\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache

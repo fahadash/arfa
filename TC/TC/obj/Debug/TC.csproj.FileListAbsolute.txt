@@ -1,5 +1,0 @@
-C:\dev\TC\TC\TC\bin\TC.dll
-C:\dev\TC\TC\TC\bin\TC.pdb
-C:\dev\TC\TC\TC\obj\Debug\ResolveAssemblyReference.cache
-C:\dev\TC\TC\TC\obj\Debug\TC.dll
-C:\dev\TC\TC\TC\obj\Debug\TC.pdb

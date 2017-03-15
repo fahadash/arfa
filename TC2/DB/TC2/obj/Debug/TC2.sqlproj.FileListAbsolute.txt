@@ -1,5 +1,0 @@
-C:\Dev\TC\TC2\DB\TC2\bin\Debug\TC2.dacpac
-C:\Dev\TC\TC2\DB\TC2\bin\Debug\TC2.dll
-C:\Dev\TC\TC2\DB\TC2\bin\Debug\TC2.pdb
-C:\Dev\TC\TC2\DB\TC2\obj\Debug\TC2.dll
-C:\Dev\TC\TC2\DB\TC2\obj\Debug\TC2.pdb

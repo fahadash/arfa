@@ -1,4 +1,0 @@
-C:\Dev\TC\TC2\Service\TC2.Common\bin\Debug\TC2.Common.dll
-C:\Dev\TC\TC2\Service\TC2.Common\bin\Debug\TC2.Common.pdb
-C:\Dev\TC\TC2\Service\TC2.Common\obj\Debug\TC2.Common.dll
-C:\Dev\TC\TC2\Service\TC2.Common\obj\Debug\TC2.Common.pdb

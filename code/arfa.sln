@@ -14,6 +14,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "arfaWeb", "src\arfaWeb\arfa
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "arfaDB", "src\arfaDB\arfaDB.sqlproj", "{A303A3D5-FF8C-4DA6-A83F-3640E9FE2DCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arfa.PrologInterface", "src\arfa.PrologInterface\arfa.PrologInterface.csproj", "{E71148EA-6D9D-42DB-9D93-7DDB4607288A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{A303A3D5-FF8C-4DA6-A83F-3640E9FE2DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A303A3D5-FF8C-4DA6-A83F-3640E9FE2DCD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A303A3D5-FF8C-4DA6-A83F-3640E9FE2DCD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E71148EA-6D9D-42DB-9D93-7DDB4607288A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71148EA-6D9D-42DB-9D93-7DDB4607288A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71148EA-6D9D-42DB-9D93-7DDB4607288A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71148EA-6D9D-42DB-9D93-7DDB4607288A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,5 +43,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6562960F-00D7-4F81-9157-22C52B3B9A11} = {C856A9E3-C110-4AEF-A664-479BC0B64BB2}
 		{A303A3D5-FF8C-4DA6-A83F-3640E9FE2DCD} = {C856A9E3-C110-4AEF-A664-479BC0B64BB2}
+		{E71148EA-6D9D-42DB-9D93-7DDB4607288A} = {C856A9E3-C110-4AEF-A664-479BC0B64BB2}
 	EndGlobalSection
 EndGlobal

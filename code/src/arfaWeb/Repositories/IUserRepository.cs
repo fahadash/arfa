@@ -16,11 +16,12 @@ namespace arfaWeb.Repositories
 
     public interface IUserRepository
     {
-        void ChangePassword(string userName, string currentPassword, string newPassword);
+        User GetUser(Guid token);
+        void ChangePassword(User user, string newPassword);
 
-        UserRepositoryOperationResult SignIn(string username, string password);
+        User SignIn(string username, string password);
 
-        User GetUser(string userId);
+        User GetUser(int userId);
 
         void UpdateTokenTimestamp(int userId);
 

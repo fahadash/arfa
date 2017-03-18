@@ -4,13 +4,47 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using arfaWeb.Exceptions;
+using arfaWeb.Repositories;
+using arfaWeb.Models.Requests;
+using arfaWeb.Models.Response;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace arfaWeb.Controllers
 {
+    [Route("api/v2/[controller]/[action]")]
     public class UserAccountController : Controller
     {
+        private readonly IUserRepository userRepository;
+
+        public UserAccountController(IUserRepository userRepository)
+        {
+            this.userRepository = userRepository;
+        }
+
+        [HttpPost]
+        public IActionResult Login([FromBody] LoginRequest request)
+        {
+            var user = userRepository.SignIn(request.username, request.password);
+            
+            if (user == null)
+            {
+                return StatusCode(403, new Response()
+                {
+                    status = "FAILED",
+                    message = "Login failed"
+                });
+            }
+
+            return Ok(new LoginResponse()
+            {
+                status = "SUCCESS",
+                message = "Login Successful",
+                token = user.Token.ToString(),
+                username = user.Username
+            });
+        }
+
         //object ResultObject(string errorCode, string errorMessage)
         //{
         //    return new { errorcode = errorCode, errormessage = errorMessage };

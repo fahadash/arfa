@@ -7,11 +7,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using arfaWeb.Database;
+using arfaWeb.Repositories;
 
 namespace arfaWeb
 {
     public class Startup
     {
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -27,6 +31,9 @@ namespace arfaWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<arfaDBContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("arfaConnection")));
+            services.AddTransient<IUserRepository, Repositories.EfSql.UserRepository>();
             // Add framework services.
             services.AddMvc();
         }

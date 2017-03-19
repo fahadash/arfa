@@ -81,6 +81,12 @@ namespace arfaWeb.Controllers
 
                 var result = userRepository.Register(request.username, request.password, request.firstName, request.lastName,
                         request.age);
+
+                if (result.Result == UserRepositoryOperationResult.UsernameAlreadyInUse)
+                {
+                    throw new ArfaException("USERNAMETAKEN", "This username is already taken, please choose another");
+                }
+
                 var login = userRepository.SignIn(request.username, request.password);
 
                 return new RegisterResponse()
@@ -120,6 +126,10 @@ namespace arfaWeb.Controllers
                 #endregion
 
                 var user = userRepository.GetUser(request.loginToken);
+                if (user == null)
+                {
+                    throw new ArfaException("INVALIDTOKEN", "Invalid token supplied. Make sure this user is logged in.");
+                }
                 userRepository.ChangePassword(user, request.newPassword);
 
                 var login = userRepository.SignIn(request.username, request.newPassword);

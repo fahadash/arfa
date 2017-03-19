@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using arfaWeb.Database;
 
-namespace arfaWeb.Database
+namespace arfa.Repository.EfSql.Database.Database
 {
     public partial class arfaDBContext : DbContext
     {

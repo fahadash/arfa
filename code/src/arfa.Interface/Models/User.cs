@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace arfaInterface.Models
+namespace arfa.Interface.Models
 {
     public class User
     {
@@ -12,7 +12,7 @@ namespace arfaInterface.Models
         public string Password { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-
-        public int Age { get; set; }
+        public Guid Token { get; set; }
+        public int? Age { get; set; }
     }
 }

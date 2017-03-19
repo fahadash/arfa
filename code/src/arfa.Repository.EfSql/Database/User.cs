@@ -16,6 +16,20 @@ namespace arfaWeb.Database
             UserTableInventory = new HashSet<UserTableInventory>();
         }
 
+        public arfa.Interface.Models.User ToInterface()
+        {
+            return new arfa.Interface.Models.User()
+            {
+                UserId=this.UserId,
+                UserName = this.Username,
+                Firstname = this.Firstname,
+                Lastname = this.Lastname,
+                Password = this.Password,
+                Age = this.Age,
+                Token = this.Token.Value
+            };
+        }
+
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }

@@ -1,11 +1,10 @@
-﻿using arfaInterface.Models;
-using arfaWeb.Database;
+﻿using arfa.Interface.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace arfaInterface.Repositories
+namespace arfa.Interface.Repositories
 {
     public enum TableOperationResult
     {

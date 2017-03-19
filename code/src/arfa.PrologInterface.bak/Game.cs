@@ -1,11 +1,10 @@
-﻿using arfa.Interface.Exceptions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace arfa.PrologInterface
+namespace PrologInterface
 {
     public class Game : IDisposable
     {
@@ -14,9 +13,9 @@ namespace arfa.PrologInterface
 
         public Game()
         {
-            //    logicServer = new LogicServer();
-            //    logicServer.Init("");
-            //    logicServer.Load(xplPath);
+        //    logicServer = new LogicServer();
+        //    logicServer.Init("");
+        //    logicServer.Load(xplPath);
         }
 
         public void NewGame()
@@ -25,7 +24,7 @@ namespace arfa.PrologInterface
             {
                 ExecStrWithExceptionThrown("start_new_game.", "New game could not be started");
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
                 throw new ArfaException("FAILED", lse.Message);
             }
@@ -44,19 +43,19 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on set_trump");
+                    throw new TCException("FAILED", "Failed to get term on set_trump");
                 }
 
                 result = logicServer.GetStrArg(term, 2);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             if (result == "INVALIDSUIT")
             {
-                throw new ArfaException(result, "Invalid suit supplied for trump");
+                throw new TCException(result, "Invalid suit supplied for trump");
             }
 
         }
@@ -95,18 +94,18 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on get_game_started");
+                    throw new TCException("FAILED", "Failed to get term on get_game_started");
                 }
 
                 started = logicServer.GetStrArg(term, 1);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return bool.Parse(started);
-
+         
         }
 
 
@@ -120,14 +119,14 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on get_trump_chosen");
+                    throw new TCException("FAILED", "Failed to get term on get_trump_chosen");
                 }
 
                 chosen = logicServer.GetStrArg(term, 1);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return bool.Parse(chosen);
@@ -144,14 +143,14 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on get_trump");
+                    throw new TCException("FAILED", "Failed to get term on get_trump");
                 }
 
                 trump = logicServer.GetStrArg(term, 1);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             if (!string.IsNullOrEmpty(trump))
@@ -174,14 +173,14 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on get_current_suit");
+                    throw new TCException("FAILED", "Failed to get term on get_current_suit");
                 }
 
                 suit = logicServer.GetStrArg(term, 1);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             if (!string.IsNullOrEmpty(suit))
@@ -192,7 +191,7 @@ namespace arfa.PrologInterface
             {
                 return SuitType.na;
             }
-
+         
         }
 
         public int GetHandsOnTable()
@@ -205,14 +204,14 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on get_hands_accumulated");
+                    throw new TCException("FAILED", "Failed to get term on get_hands_accumulated");
                 }
 
                 hands = logicServer.GetIntArg(term, 1);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return hands;
@@ -228,14 +227,14 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on which_player_turn");
+                    throw new TCException("FAILED", "Failed to get term on which_player_turn");
                 }
 
                 playerNumber = logicServer.GetIntArg(term, 1);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return playerNumber;
@@ -251,14 +250,14 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on player_card_on_table");
+                    throw new TCException("FAILED", "Failed to get term on player_card_on_table");
                 }
 
                 card = logicServer.GetStrArg(term, 2);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return card;
@@ -274,14 +273,14 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on get_dominant_player");
+                    throw new TCException("FAILED", "Failed to get term on get_dominant_player");
                 }
 
                 playerNumber = logicServer.GetIntArg(term, 1);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return playerNumber;
@@ -297,14 +296,14 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on get_player_score");
+                    throw new TCException("FAILED", "Failed to get term on get_player_score");
                 }
 
                 score = logicServer.GetIntArg(term, 2);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return score;
@@ -325,9 +324,9 @@ namespace arfa.PrologInterface
 
                 winner = logicServer.GetIntArg(term, 1);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return winner;
@@ -342,11 +341,11 @@ namespace arfa.PrologInterface
 
             try
             {
-
+                
                 string cardList = "[", aliasFinderList = string.Empty;
                 string execStr = string.Empty;
 
-                int a = 0;
+                int a=0;
                 if (cards.Count() > 0)
                 {
                     foreach (string card in cards)
@@ -370,13 +369,13 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", "Failed to get term on adding cards");
+                    throw new TCException("FAILED", "Failed to get term on adding cards");
                 }
 
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
         }
@@ -388,9 +387,9 @@ namespace arfa.PrologInterface
                 ExecStrWithExceptionThrown(string.Format("set_score(1, {0}), set_score(2, {1}), set_score(3, {2}), set_score(4, {3})", player1Score,
                                                                 player2Score, player3Score, player4Score), "Scores could not be set");
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
         }
 
@@ -401,7 +400,7 @@ namespace arfa.PrologInterface
                 string cards = string.Format("set_player_card_on_hand(1, '{0}'), set_player_card_on_hand(2, '{1}'), set_player_card_on_hand(3, '{2}'), set_player_card_on_hand(4, '{3}'). ", player1Card,
                                                 player2Card, player3Card, player4Card);
 
-                string execStr = cards;
+                string execStr = cards ;
 
                 ExecStrWithExceptionThrown(execStr, "Player cards on table could not be set");
 
@@ -439,13 +438,13 @@ namespace arfa.PrologInterface
                     ExecStrWithExceptionThrown(execStr, "Could not set the current_suit");
                 }
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
-
+            
         }
-
+        
         #endregion
 
         #region Game Movement
@@ -476,9 +475,9 @@ namespace arfa.PrologInterface
                     return true;
                 }
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return false;
@@ -499,9 +498,9 @@ namespace arfa.PrologInterface
                     return true;
                 }
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return false;
@@ -524,12 +523,12 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("FAILED", exceptionMessage + ", last error: " + GetLastError());
+                    throw new TCException("FAILED", exceptionMessage + ", last error: " + GetLastError());
                 }
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
         }
 
@@ -541,14 +540,14 @@ namespace arfa.PrologInterface
 
                 if (term == 0)
                 {
-                    throw new ArfaException("LASTERRORFAILED", string.Empty);
+                    throw new TCException("LASTERRORFAILED", string.Empty);
                 }
 
                 return logicServer.GetStrArg(term, 1);
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("LASTERRORFAILED", lse.Message);
+                throw new TCException("LASTERRORFAILED", lse.Message);
             }
 
             return string.Empty;
@@ -566,9 +565,9 @@ namespace arfa.PrologInterface
                 }
 
             }
-            catch (Exception lse)
+            catch (LSException lse)
             {
-                throw new ArfaException("FAILED", lse.Message);
+                throw new TCException("FAILED", lse.Message);
             }
 
             return string.Empty;

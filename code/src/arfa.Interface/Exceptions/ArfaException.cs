@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace arfaWeb.Exceptions
+namespace arfa.Interface.Exceptions
 {
     public class ArfaException : System.Exception
     {

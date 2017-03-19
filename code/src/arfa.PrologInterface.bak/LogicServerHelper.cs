@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace arfa.PrologInterface
+namespace PrologInterface
 {
     public class LogicServerHelper
     {
@@ -29,7 +29,7 @@ namespace arfa.PrologInterface
         {
             return logicServer.GetStrArg(term, argumentNumber);
         }
-
+        
         public int GetIntArg(int term, int argumentNumber)
         {
             return logicServer.GetIntArg(term, argumentNumber);

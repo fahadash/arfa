@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace arfaInterface.Models
+namespace arfa.Interface.Models
 {
     public class Table
     {

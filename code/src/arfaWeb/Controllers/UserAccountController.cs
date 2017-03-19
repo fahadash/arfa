@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using arfaWeb.Exceptions;
-using arfaWeb.Repositories;
 using arfaWeb.Models.Requests;
 using arfaWeb.Models.Response;
 using arfaWeb.Helpers;
+using arfa.Interface.Business;
+using arfa.Interface.Exceptions;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,17 +16,17 @@ namespace arfaWeb.Controllers
     [Route("api/v2/[controller]/[action]")]
     public class UserAccountController : Controller
     {
-        private readonly IUserRepository userRepository;
+        private readonly IUserAccountService service;
 
-        public UserAccountController(IUserRepository userRepository)
+        public UserAccountController(IUserAccountService svc)
         {
-            this.userRepository = userRepository;
+            this.service = svc;
         }
 
         [HttpPost]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            var user = userRepository.SignIn(request.username, request.password);
+            var user = service.SignIn(request.username, request.password);
             
             if (user == null)
             {
@@ -42,65 +42,66 @@ namespace arfaWeb.Controllers
                 status = "SUCCESS",
                 message = "Login Successful",
                 token = user.Token.ToString(),
-                username = user.Username
+                username = user.UserName
             });
         }
 
         [HttpPost]
         public RegisterResponse Register([FromBody] RegisterRequest request)
         {
-            if (!ModelState.IsValid)
-            {
-                throw new ArfaException("Invalid model state");
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    throw new ArfaException("Invalid model state");
+            //}
 
-            try
-            {
-                #region Validate Params
-                if (request.username.Length < 3)
-                {
-                    throw new ArfaException("USERNAMETOOSHORT", "Username must be at least 3 characters long");
-                }
+            //try
+            //{
+            //    #region Validate Params
+            //    if (request.username.Length < 3)
+            //    {
+            //        throw new ArfaException("USERNAMETOOSHORT", "Username must be at least 3 characters long");
+            //    }
 
-                if (request.password != request.confirmPassword)
-                {
-                    throw new ArfaException("PASSWORDMISMATCH", "Password and Confirm Password don't match");
-                }
+            //    if (request.password != request.confirmPassword)
+            //    {
+            //        throw new ArfaException("PASSWORDMISMATCH", "Password and Confirm Password don't match");
+            //    }
 
-                if (request.password.Length < 5)
-                {
-                    throw new ArfaException("PASSWORDTOOSHORT", "Password must be at least 4 characters long");
-                }
+            //    if (request.password.Length < 5)
+            //    {
+            //        throw new ArfaException("PASSWORDTOOSHORT", "Password must be at least 4 characters long");
+            //    }
 
 
-                if (request.age < 14)
-                {
-                    throw new ArfaException("USERTOOYOUNG", "Minimum age required is 14");
-                }
-                #endregion
+            //    if (request.age < 14)
+            //    {
+            //        throw new ArfaException("USERTOOYOUNG", "Minimum age required is 14");
+            //    }
+            //    #endregion
 
-                var result = userRepository.Register(request.username, request.password, request.firstName, request.lastName,
-                        request.age);
+            //    var result = userRepository.Register(request.username, request.password, request.firstName, request.lastName,
+            //            request.age);
 
-                if (result.Result == UserRepositoryOperationResult.UsernameAlreadyInUse)
-                {
-                    throw new ArfaException("USERNAMETAKEN", "This username is already taken, please choose another");
-                }
+            //    if (result.Result == UserRepositoryOperationResult.UsernameAlreadyInUse)
+            //    {
+            //        throw new ArfaException("USERNAMETAKEN", "This username is already taken, please choose another");
+            //    }
 
-                var login = userRepository.SignIn(request.username, request.password);
+            //    var login = userRepository.SignIn(request.username, request.password);
 
-                return new RegisterResponse()
-                {
-                    status = "SUCCESS",
-                    message = "User registered successfully",
-                    username = request.username,
-                    token = login.Token.ToString()
-                };
-            }
-            catch (Exception e)
-            {
-                return ExceptionHelper.CreateResponse<RegisterResponse>(e);
-            }
+            //    return new RegisterResponse()
+            //    {
+            //        status = "SUCCESS",
+            //        message = "User registered successfully",
+            //        username = request.username,
+            //        token = login.Token.ToString()
+            //    };
+            //}
+            //catch (Exception e)
+            //{
+            //    return ExceptionHelper.CreateResponse<RegisterResponse>(e);
+            //}
+            return null;
         }
         
         [HttpPost]
@@ -118,28 +119,16 @@ namespace arfaWeb.Controllers
                 {
                     throw new ArfaException("PASSWORDMISMATCH", "New Password and Confirm New Password don't match");
                 }
-
-                if (request.newPassword.Length < 5)
-                {
-                    throw new ArfaException("PASSWORDTOOSHORT", "New Password must be at least 5 characters long");
-                }
                 #endregion
 
-                var user = userRepository.GetUser(request.loginToken);
-                if (user == null)
-                {
-                    throw new ArfaException("INVALIDTOKEN", "Invalid token supplied. Make sure this user is logged in.");
-                }
-                userRepository.ChangePassword(user, request.newPassword);
-
-                var login = userRepository.SignIn(request.username, request.newPassword);
+                var newtoken = service.ChangePassword(request.loginToken, request.username, request.currentPassword, request.newPassword);
 
                 return new ChangePasswordResponse()
                 {
                     status = "SUCCESS",
                     message = "Password changed successfully",
-                    token  = login.Token.ToString(),
-                    username = user.Username
+                    token  = newtoken.ToString(),
+                    username = request.username
                 };
             }
             catch (Exception e)

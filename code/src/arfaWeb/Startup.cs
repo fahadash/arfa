@@ -8,8 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using arfaWeb.Database;
-using arfaWeb.Repositories;
+using arfa.Interface.Repositories;
+using arfa.Repository.EfSql.Database.Database;
+using arfa.Interface.Business;
 
 namespace arfaWeb
 {
@@ -34,6 +35,7 @@ namespace arfaWeb
             services.AddDbContext<arfaDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("arfaConnection")));
             services.AddTransient<IUserRepository, Repositories.EfSql.UserRepository>();
+            services.AddTransient<IUserAccountService, arfa.Business.Services.UserAccountService>();
             // Add framework services.
             services.AddMvc();
         }

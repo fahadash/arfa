@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace arfa.PrologInterface
+namespace PrologInterface
 {
     public enum SuitType
     {

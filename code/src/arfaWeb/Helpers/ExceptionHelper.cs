@@ -1,4 +1,5 @@
-﻿using arfaWeb.Exceptions;
+﻿
+using arfa.Interface.Exceptions;
 using arfaWeb.Models.Response;
 using System;
 using System.Collections.Generic;

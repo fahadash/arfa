@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace arfaInterface.Repositories
+namespace arfa.Interface.Repositories
 {
     public interface IRegisterResult
     {

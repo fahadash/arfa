@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using arfaWeb.Database;
+using arfa.Interface.Repositories;
+using arfa.Repository.EfSql.Database.Database;
 
 namespace arfaWeb.Repositories.EfSql
 {
@@ -15,23 +17,27 @@ namespace arfaWeb.Repositories.EfSql
             dbContext = ctx;
         }
 
-        public User GetUser(Guid token)
+        public arfa.Interface.Models.User GetUser(Guid token)
         {
-            return dbContext.User.Where(u => u.Token == token).FirstOrDefault();
+            return dbContext.User.Where(u => u.Token == token)
+                .Select(user => user.ToInterface())
+                .FirstOrDefault();
         }
 
-        void IUserRepository.ChangePassword(User user, string newPassword)
+        public void ChangePassword(arfa.Interface.Models.User user, string newPassword)
         {
             user.Password = newPassword;
-            dbContext.SaveChanges();
+            dbContext.SaveChanges();            
         }
 
-        User IUserRepository.GetUser(int userId)
+        arfa.Interface.Models.User IUserRepository.GetUser(int userId)
         {
-            return dbContext.User.Where(u => u.UserId == userId).FirstOrDefault();
+            return dbContext.User.Where(u => u.UserId == userId)
+                .Select(user => user.ToInterface())
+                .FirstOrDefault();
         }
 
-        IRegisterResult IUserRepository.Register(string username, string password, string firstname, string lastname, int age)
+        public IRegisterResult Register(string username, string password, string firstname, string lastname, int age)
         {
             if (dbContext.User.Any(u => u.Username.Equals(username, StringComparison.CurrentCultureIgnoreCase)))
             {
@@ -61,7 +67,7 @@ namespace arfaWeb.Repositories.EfSql
             };
         }
 
-        User IUserRepository.SignIn(string username, string password)
+        public arfa.Interface.Models.User SignIn(string username, string password)
         {
             var user = dbContext.User
                 .FirstOrDefault(u => u.Username == username && u.Password == password);
@@ -74,10 +80,10 @@ namespace arfaWeb.Repositories.EfSql
                 dbContext.SaveChanges();
             }
 
-            return user;
+            return user.ToInterface();
         }
 
-        void IUserRepository.UpdateTokenTimestamp(int userId)
+        public void UpdateTokenTimestamp(int userId)
         {
             throw new NotImplementedException();
         }

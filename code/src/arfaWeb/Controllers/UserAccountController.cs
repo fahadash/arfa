@@ -7,6 +7,7 @@ using arfaWeb.Exceptions;
 using arfaWeb.Repositories;
 using arfaWeb.Models.Requests;
 using arfaWeb.Models.Response;
+using arfaWeb.Helpers;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -45,178 +46,97 @@ namespace arfaWeb.Controllers
             });
         }
 
-        //object ResultObject(string errorCode, string errorMessage)
-        //{
-        //    return new { errorcode = errorCode, errormessage = errorMessage };
-        //}
+        [HttpPost]
+        public RegisterResponse Register([FromBody] RegisterRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new ArfaException("Invalid model state");
+            }
 
-        //object UserInfoObject(int userId, string userName, string firstName, string lastName, int age)
-        //{
-        //    return new { userid = userId, username = userName, firstname = firstName, lastname = lastName, age = age };
-        //}
+            try
+            {
+                #region Validate Params
+                if (request.username.Length < 3)
+                {
+                    throw new ArfaException("USERNAMETOOSHORT", "Username must be at least 3 characters long");
+                }
 
-        //public class LogInParams
-        //{
-        //    public string username { get; set; }
-        //    public string password { get; set; }
-        //}
-        //[HttpPost]
-        //public object LogIn(LogInParams par)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        throw new ArfaException("Invalid model state");
-        //    }
-        //    object userLogin = null;
-        //    try
-        //    {
-        //        userLogin = UserModel.LogIn(par.username, par.password);
-        //    }
-        //    catch (TCException tce)
-        //    {
-        //        return new
-        //        {
-        //            result = tce.GetJsonException(),
-        //            response = new
-        //            {
-        //                user = new { logintoken = Guid.Empty.ToString() }
-        //            }
-        //        };
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return new { result = ResultObject("FAILED", e.Message), response = userLogin };
-        //    }
+                if (request.password != request.confirmPassword)
+                {
+                    throw new ArfaException("PASSWORDMISMATCH", "Password and Confirm Password don't match");
+                }
 
-        //    return new { result = ResultObject("SUCCESS", string.Empty), response = userLogin };
-
-        //}
-
-        //public class RegisterParams
-        //{
-        //    public string username { get; set; }
-        //    public string password { get; set; }
-        //    public string confirmpassword { get; set; }
-        //    public string firstname { get; set; }
-        //    public string lastname { get; set; }
-        //    public int age { get; set; }
-        //    public string reserved1 { get; set; }
-        //    public string reserved2 { get; set; }
-        //}
-
-        //private void ValidateRegisterParams(RegisterParams param)
-        //{
-        //    if (param.username.Length < 3)
-        //    {
-        //        throw new TCException("USERNAMETOOSHORT", "Username must be at least 3 characters long");
-        //    }
-
-        //    if (param.password != param.confirmpassword)
-        //    {
-        //        throw new TCException("PASSWORDMISMATCH", "Password and Confirm Password don't match");
-        //    }
-
-        //    if (param.password.Length < 5)
-        //    {
-        //        throw new TCException("PASSWORDTOOSHORT", "Password must be at least 4 characters long");
-        //    }
+                if (request.password.Length < 5)
+                {
+                    throw new ArfaException("PASSWORDTOOSHORT", "Password must be at least 4 characters long");
+                }
 
 
-        //    if (param.age < 14)
-        //    {
-        //        throw new TCException("USERTOOYOUNG", "Minimum age required is 14");
-        //    }
-        //}
+                if (request.age < 14)
+                {
+                    throw new ArfaException("USERTOOYOUNG", "Minimum age required is 14");
+                }
+                #endregion
 
-        //[HttpPost]
-        //public object Register(RegisterParams registerParams)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        throw new ArfaException("Invalid model state");
-        //    }
+                var result = userRepository.Register(request.username, request.password, request.firstName, request.lastName,
+                        request.age);
+                var login = userRepository.SignIn(request.username, request.password);
 
-        //    UserModel model;
-        //    try
-        //    {
-        //        ValidateRegisterParams(registerParams);
+                return new RegisterResponse()
+                {
+                    status = "SUCCESS",
+                    message = "User registered successfully",
+                    username = request.username,
+                    token = login.Token.ToString()
+                };
+            }
+            catch (Exception e)
+            {
+                return ExceptionHelper.CreateResponse<RegisterResponse>(e);
+            }
+        }
+        
+        [HttpPost]
+        public ChangePasswordResponse ChangePassword([FromBody] ChangePasswordRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                throw new ArfaException("Invalid model state");
+            }
+            Guid token = Guid.Empty;
+            try
+            {
+                #region Validate Params
+                if (request.newPassword != request.confirmPassword)
+                {
+                    throw new ArfaException("PASSWORDMISMATCH", "New Password and Confirm New Password don't match");
+                }
 
-        //        model = UserModel.CreateUser(registerParams.username, registerParams.password, registerParams.firstname,
-        //                             registerParams.lastname, registerParams.age);
-        //    }
-        //    catch (TCException tce)
-        //    {
-        //        return new
-        //        {
-        //            result = tce.GetJsonException(),
-        //            response = new
-        //            {
-        //                user = UserInfoObject(0, registerParams.username, registerParams.firstname, registerParams.lastname, registerParams.age)
-        //            }
-        //        };
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return new
-        //        {
-        //            result = ResultObject("FAILED", "Unknown exception occurred at controller: " + e.Message),
-        //            response = new
-        //            {
-        //                user = UserInfoObject(0, registerParams.username, registerParams.firstname, registerParams.lastname, registerParams.age)
-        //            }
-        //        };
-        //    }
-        //    return new
-        //    {
-        //        result = ResultObject("SUCCESS", string.Empty),
-        //        response = new
-        //        {
-        //            user = UserInfoObject(0, model.UserName, model.Firstname, model.Lastname, model.Age)
-        //        }
-        //    };
-        //}
+                if (request.newPassword.Length < 5)
+                {
+                    throw new ArfaException("PASSWORDTOOSHORT", "New Password must be at least 5 characters long");
+                }
+                #endregion
 
-        //public class ChangePasswordParams
-        //{
-        //    public string username { get; set; }
-        //    public string currentpassword { get; set; }
-        //    public string newpassword { get; set; }
-        //    public string confirmnewpassword { get; set; }
-        //}
+                var user = userRepository.GetUser(request.loginToken);
+                userRepository.ChangePassword(user, request.newPassword);
 
-        //private void ValidateChangePasswordParams(ChangePasswordParams param)
-        //{
+                var login = userRepository.SignIn(request.username, request.newPassword);
 
-        //    if (param.newpassword != param.confirmnewpassword)
-        //    {
-        //        throw new TCException("PASSWORDMISMATCH", "New Password and Confirm New Password don't match");
-        //    }
+                return new ChangePasswordResponse()
+                {
+                    status = "SUCCESS",
+                    message = "Password changed successfully",
+                    token  = login.Token.ToString(),
+                    username = user.Username
+                };
+            }
+            catch (Exception e)
+            {
+                return ExceptionHelper.CreateResponse<ChangePasswordResponse>(e);
+            }
 
-        //    if (param.newpassword.Length < 5)
-        //    {
-        //        throw new TCException("PASSWORDTOOSHORT", "New Password must be at least 5 characters long");
-        //    }
-
-        //}
-        //[HttpPost]
-        //public object ChangePassword(ChangePasswordParams changePasswordParams)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        throw new ArfaException("Invalid model state");
-        //    }
-        //    Guid token = Guid.Empty;
-        //    try
-        //    {
-        //        ValidateChangePasswordParams(changePasswordParams);
-        //        token = UserModel.ChangePassword(changePasswordParams.username, changePasswordParams.currentpassword, changePasswordParams.newpassword);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return new { result = ResultObject("FAILED", e.Message), response = new { logintoken = token.ToString() } };
-        //    }
-
-        //    return new { result = ResultObject("SUCCESS", string.Empty), response = new { logintoken = token.ToString() } };
-        //}
+        }
     }
 }

@@ -37,7 +37,26 @@ namespace arfa.Business.Services
 
         public IRegisterResult Register(string username, string password, string firstname, string lastname, int age)
         {
-            throw new NotImplementedException();
+            if (username.Length < 3)
+            {
+                throw new ArfaException("USERNAMETOOSHORT", "Username must be at least 3 characters long");
+            }
+
+
+            if (password.Length < 5)
+            {
+                throw new ArfaException("PASSWORDTOOSHORT", "Password must be at least 4 characters long");
+            }
+
+
+            if (age < 14)
+            {
+                throw new ArfaException("USERTOOYOUNG", "Minimum age required is 14");
+            }
+
+            var result = userRepository.Register(username, password, firstname, lastname, age);
+
+            return result;
         }
 
         public User SignIn(string username, string password)

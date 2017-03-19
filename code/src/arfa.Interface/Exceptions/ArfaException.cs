@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace arfa.Interface.Exceptions
 {
-    public class ArfaException : System.Exception
+    public class ArfaException : Exception
     {
         public string ErrorCode { get; set; }
         public ArfaException(string message) : base(message)

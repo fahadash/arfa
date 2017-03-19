@@ -26,7 +26,8 @@ namespace arfaWeb.Repositories.EfSql
 
         public void ChangePassword(arfa.Interface.Models.User user, string newPassword)
         {
-            user.Password = newPassword;
+            var dbUser = dbContext.User.First(u => u.UserId == user.UserId);
+            dbUser.Password = newPassword;
             dbContext.SaveChanges();            
         }
 

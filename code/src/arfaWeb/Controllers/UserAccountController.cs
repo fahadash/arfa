@@ -49,58 +49,43 @@ namespace arfaWeb.Controllers
         [HttpPost]
         public RegisterResponse Register([FromBody] RegisterRequest request)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    throw new ArfaException("Invalid model state");
-            //}
+            if (!ModelState.IsValid)
+            {
+                throw new ArfaException("Invalid model state");
+            }
 
-            //try
-            //{
-            //    #region Validate Params
-            //    if (request.username.Length < 3)
-            //    {
-            //        throw new ArfaException("USERNAMETOOSHORT", "Username must be at least 3 characters long");
-            //    }
+            try
+            {
+                #region Validate Params
+                if (request.password != request.confirmPassword)
+                {
+                    throw new ArfaException("PASSWORDMISMATCH", "Password and Confirm Password don't match");
+                }
 
-            //    if (request.password != request.confirmPassword)
-            //    {
-            //        throw new ArfaException("PASSWORDMISMATCH", "Password and Confirm Password don't match");
-            //    }
+                #endregion
 
-            //    if (request.password.Length < 5)
-            //    {
-            //        throw new ArfaException("PASSWORDTOOSHORT", "Password must be at least 4 characters long");
-            //    }
+                var result = service.Register(request.username, request.password, request.firstName, request.lastName,
+                        request.age);
 
+                if (result.Result == arfa.Interface.Repositories.UserRepositoryOperationResult.UsernameAlreadyInUse)
+                {
+                    throw new ArfaException("USERNAMETAKEN", "This username is already taken, please choose another");
+                }
 
-            //    if (request.age < 14)
-            //    {
-            //        throw new ArfaException("USERTOOYOUNG", "Minimum age required is 14");
-            //    }
-            //    #endregion
+                var login = service.SignIn(request.username, request.password);
 
-            //    var result = userRepository.Register(request.username, request.password, request.firstName, request.lastName,
-            //            request.age);
-
-            //    if (result.Result == UserRepositoryOperationResult.UsernameAlreadyInUse)
-            //    {
-            //        throw new ArfaException("USERNAMETAKEN", "This username is already taken, please choose another");
-            //    }
-
-            //    var login = userRepository.SignIn(request.username, request.password);
-
-            //    return new RegisterResponse()
-            //    {
-            //        status = "SUCCESS",
-            //        message = "User registered successfully",
-            //        username = request.username,
-            //        token = login.Token.ToString()
-            //    };
-            //}
-            //catch (Exception e)
-            //{
-            //    return ExceptionHelper.CreateResponse<RegisterResponse>(e);
-            //}
+                return new RegisterResponse()
+                {
+                    status = "SUCCESS",
+                    message = "User registered successfully",
+                    username = request.username,
+                    token = login.Token.ToString()
+                };
+            }
+            catch (Exception e)
+            {
+                return ExceptionHelper.CreateResponse<RegisterResponse>(e);
+            }
             return null;
         }
         

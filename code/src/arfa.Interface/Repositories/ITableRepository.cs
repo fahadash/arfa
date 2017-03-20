@@ -20,18 +20,20 @@ namespace arfa.Interface.Repositories
 
     public interface ITableRepository
     {
-        Table CreateTable(Guid loginToken, string Tablename);
+        Table CreateTable(int userId, string tableName);
 
         Table GetTable(int tableId);
 
-        void JoinTable(Guid loginToken, int tableId);
+        void JoinTable(int userId, int tableId);
 
-        IEnumerable<Table> ListJoinableTables(Guid loginToken);
+        IEnumerable<Table> ListJoinableTables(int userId);
 
-        IEnumerable<Table> ListTablesUserIsOn(Guid loginToken);
+        IEnumerable<Table> ListTablesUserIsOn(int userId);
 
-        IEnumerable<Table> ListUserTables(Guid loginToken);
+        IEnumerable<Table> ListUserTables(int userId);
 
-        void SuspendTable(int TableId);
+        void SuspendTable(int tableId);
+
+        TableState GetTableState(int tableId);
     }
 }

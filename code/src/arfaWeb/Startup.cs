@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using arfa.Interface.Repositories;
-using arfa.Repository.EfSql.Database.Database;
 using arfa.Interface.Business;
 
 namespace arfaWeb
@@ -32,10 +27,12 @@ namespace arfaWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<arfaDBContext>(options =>
+            services.AddDbContext<arfa.Repository.EfSql.Database.arfaDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("arfaConnection")));
-            services.AddTransient<IUserRepository, Repositories.EfSql.UserRepository>();
+            services.AddTransient<IUserRepository, arfa.Repository.EfSql.UserRepository>();
+            services.AddTransient<ITableRepository, arfa.Repository.EfSql.TableRepository>();
             services.AddTransient<IUserAccountService, arfa.Business.Services.UserAccountService>();
+            services.AddTransient<ITableService, arfa.Business.Services.TableService>();
             // Add framework services.
             services.AddMvc();
         }

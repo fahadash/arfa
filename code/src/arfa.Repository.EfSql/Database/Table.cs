@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace arfaWeb.Database
+namespace arfa.Repository.EfSql.Database
 {
     public partial class Table
     {
@@ -12,6 +12,17 @@ namespace arfaWeb.Database
             TableState = new HashSet<TableState>();
             TableUser = new HashSet<TableUser>();
             UserTableInventory = new HashSet<UserTableInventory>();
+        }
+
+        public arfa.Interface.Models.Table ToInterface()
+        {
+            return new Interface.Models.Table()
+            {
+                Owner = this.OwnerUser.ToInterface(),
+                TableId = this.TableId,
+                TableName= this.TableName,
+                AvailableSlots = 4 - this.TableUser.Count
+            };
         }
 
         public int TableId { get; set; }

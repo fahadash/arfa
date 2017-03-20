@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using arfaWeb.Database;
 using arfa.Interface.Repositories;
-using arfa.Repository.EfSql.Database.Database;
 
-namespace arfaWeb.Repositories.EfSql
+namespace arfa.Repository.EfSql
 {
     public class UserRepository : IUserRepository
     {
-        private readonly arfaDBContext dbContext;
+        private readonly arfa.Repository.EfSql.Database.arfaDBContext dbContext;
 
-        public UserRepository(arfaDBContext ctx)
+        public UserRepository(arfa.Repository.EfSql.Database.arfaDBContext ctx)
         {
             dbContext = ctx;
         }
@@ -48,7 +46,7 @@ namespace arfaWeb.Repositories.EfSql
                 };
             }
 
-            var user = new User()
+            var user = new arfa.Repository.EfSql.Database.User()
             {
                 Username = username,
                 Password = password,

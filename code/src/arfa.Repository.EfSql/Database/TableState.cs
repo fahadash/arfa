@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace arfaWeb.Database
+namespace arfa.Repository.EfSql.Database
 {
     public partial class TableState
     {

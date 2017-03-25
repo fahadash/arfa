@@ -32,12 +32,7 @@ namespace arfa.Business.Services
 
         public Table CreateTable(Guid loginToken, string tableName)
         {
-            var user = userRepository.GetUser(loginToken);
-
-            if (user == null)
-            {
-                throw new ArfaException("INVALIDTOKEN", "Invalid token, make user user is logged on");
-            }
+            var user = VerifyTokenOrThrow(loginToken);
 
             var table = tableRepository.CreateTable(user.UserId, tableName);
 
@@ -46,7 +41,18 @@ namespace arfa.Business.Services
 
         public IEnumerable<Table> GetJoinableTables(Guid loginToken)
         {
-            throw new NotImplementedException();
+
+            var user = VerifyTokenOrThrow(loginToken);
+
+            try
+            {
+                    return tableRepository.ListJoinableTables(user.UserId);
+            }
+            catch (Exception e)
+            {
+                // TODO: Add logging
+                throw new ArfaException("UNKNOWN", "An unknown error has occurred");
+            }
         }
 
         public DateTime GetTableTimestamp(Guid loginToken, int tableId)
@@ -61,17 +67,47 @@ namespace arfa.Business.Services
 
         public IEnumerable<Table> GetTableUserIsOn(Guid loginToken)
         {
-            throw new NotImplementedException();
+            var user = VerifyTokenOrThrow(loginToken);
+
+            try
+            {
+                return tableRepository.ListTablesUserIsOn(user.UserId);
+            }
+            catch (Exception e)
+            {
+                // TODO: Add logging
+                throw new ArfaException("UNKNOWN", "An unknown error has occurred");
+            }
         }
 
         public IEnumerable<Table> GetUserTables(Guid loginToken)
         {
-            throw new NotImplementedException();
+            var user = VerifyTokenOrThrow(loginToken);
+
+            try
+            {
+                return tableRepository.ListUserTables(user.UserId);
+            }
+            catch (Exception e)
+            {
+                // TODO: Add logging
+                throw new ArfaException("UNKNOWN", "An unknown error has occurred");
+            }
         }
 
         public void JoinTable(Guid loginToken, int tableId)
         {
-            throw new NotImplementedException();
+            var user = VerifyTokenOrThrow(loginToken);
+
+            try
+            {
+                tableRepository.JoinTable(user.UserId, tableId);
+            }
+            catch (Exception e)
+            {
+                // TODO: Add logging
+                throw new ArfaException("UNKNOWN", "An unknown error has occurred");
+            }
         }
 
         public void SubmitUserCard(Guid loginToken, int tableId, Card card)
@@ -81,7 +117,37 @@ namespace arfa.Business.Services
 
         public void SuspendTable(Guid loginToken, int tableId)
         {
-            throw new NotImplementedException();
+            var user = VerifyTokenOrThrow(loginToken);
+
+            try
+            {
+                var table = tableRepository.GetTable(tableId);
+                if (table.Owner.UserId == user.UserId)
+                {
+                    tableRepository.SuspendTable(tableId);
+                }
+                else
+                {
+                    throw new ArfaException("USERNOTOWNER", "User does not own this table");
+                }
+            }
+            catch (Exception e)
+            {
+                // TODO: Add logging
+                throw new ArfaException("UNKNOWN", "An unknown error has occurred");
+            }
+        }
+
+        private User VerifyTokenOrThrow(Guid loginToken)
+        {
+            var user = userRepository.GetUser(loginToken);
+
+            if (user == null)
+            {
+                throw new ArfaException("INVALIDTOKEN", "Invalid token, make user user is logged on");
+            }
+
+            return user;
         }
     }
 }

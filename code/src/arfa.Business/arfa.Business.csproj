@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\arfa.Interface\arfa.Interface.csproj" />
+    <ProjectReference Include="..\arfa.PrologInterface\arfa.PrologInterface.csproj" />
   </ItemGroup>
 
 </Project>

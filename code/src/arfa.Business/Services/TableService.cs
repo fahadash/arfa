@@ -6,6 +6,7 @@ using arfa.Interface.Enums;
 using arfa.Interface.Models;
 using arfa.Interface.Repositories;
 using arfa.Interface.Exceptions;
+using arfa.PrologInterface;
 
 namespace arfa.Business.Services
 {
@@ -22,12 +23,15 @@ namespace arfa.Business.Services
 
         public void BeginGame(Guid loginToken, int tableId)
         {
-            throw new NotImplementedException();
+            var game = new Game();
+            game.NewGame();
+
+
         }
 
         public void ChooseTrump(Guid loginToken, int tableId, Suit trumpSuit)
         {
-            throw new NotImplementedException();
+            tableRepository.SetTrump(tableId, trumpSuit);
         }
 
         public Table CreateTable(Guid loginToken, string tableName)

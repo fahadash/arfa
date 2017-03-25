@@ -5,6 +5,8 @@ using System.Text;
 using arfa.Interface.Models;
 using System.Linq;
 using arfa.Interface.Exceptions;
+using arfa.Interface.Enums;
+using arfa.Interface.Helpers;
 
 namespace arfa.Repository.EfSql
 {
@@ -15,6 +17,15 @@ namespace arfa.Repository.EfSql
         public TableRepository(Database.arfaDBContext context)
         {
             dbContext = context;
+        }
+
+        public void BeginGame(int tableId)
+        {
+            var table = dbContext.Table.FirstOrDefault(t => t.TableId == tableId);
+            
+            table.GameStarted = true;
+            
+            dbContext.SaveChanges();
         }
 
         public Table CreateTable(int userId, string tableName)
@@ -91,7 +102,16 @@ namespace arfa.Repository.EfSql
                         .Select(t => t.ToInterface());
         }
 
-    public void SuspendTable(int tableId)
+        public void SetTrump(int tableId, Suit suit)
+        {
+            var table = dbContext.Table.FirstOrDefault(t => t.TableId == tableId);
+
+            table.Trump = suit.GetDescription();
+
+            dbContext.SaveChanges();
+        }
+
+        public void SuspendTable(int tableId)
     {
             var table = dbContext.Table.FirstOrDefault(t => t.TableId == tableId);
 

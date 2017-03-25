@@ -1,4 +1,5 @@
-﻿using arfa.Interface.Models;
+﻿using arfa.Interface.Enums;
+using arfa.Interface.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,5 +36,9 @@ namespace arfa.Interface.Repositories
         void SuspendTable(int tableId);
 
         TableState GetTableState(int tableId);
+
+        void BeginGame(int tableId);
+
+        void SetTrump(int tableId, Suit suit);
     }
 }

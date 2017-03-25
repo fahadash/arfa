@@ -45,7 +45,7 @@ namespace arfa.Repository.EfSql
 
     public Table GetTable(int tableId)
     {
-        throw new NotImplementedException();
+            return dbContext.Table.Select(t => t.ToInterface()).FirstOrDefault();
     }
 
     public TableState GetTableState(int tableId)
@@ -54,28 +54,49 @@ namespace arfa.Repository.EfSql
     }
 
     public void JoinTable(int userId, int tableId)
-    {
-        throw new NotImplementedException();
-    }
+        {
+            var table = dbContext.Table.FirstOrDefault(t => t.TableId == tableId);
+
+            table.TableUser.Add(new Database.TableUser()
+            {
+                User = dbContext.User.FirstOrDefault(u => u.UserId == userId),
+                Score = 0
+            });
+
+            dbContext.SaveChanges();
+        }
 
     public IEnumerable<Table> ListJoinableTables(int userId)
     {
-        throw new NotImplementedException();
+            return dbContext
+                        .Table
+                        .Where(t => t.OwnerUserId != userId && !t.TableUser.Any(tu => tu.UserId == userId)
+                                && t.TableUser.Count() <= 3)
+                        .Select(t => t.ToInterface());
     }
 
     public IEnumerable<Table> ListTablesUserIsOn(int userId)
-    {
-        throw new NotImplementedException();
-    }
+        {
+            return dbContext
+                        .Table
+                        .Where(t => t.OwnerUserId == userId || t.TableUser.Any(tu => tu.UserId == userId))
+                        .Select(t => t.ToInterface());
+        }
 
     public IEnumerable<Table> ListUserTables(int userId)
-    {
-        throw new NotImplementedException();
-    }
+        {
+            return dbContext
+                        .Table
+                        .Where(t => t.OwnerUserId == userId)
+                        .Select(t => t.ToInterface());
+        }
 
     public void SuspendTable(int tableId)
     {
-        throw new NotImplementedException();
+            var table = dbContext.Table.FirstOrDefault(t => t.TableId == tableId);
+
+            table.Suspended = true;
+            dbContext.SaveChanges();
     }
 }
 }

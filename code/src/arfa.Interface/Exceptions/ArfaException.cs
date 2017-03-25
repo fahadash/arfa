@@ -17,5 +17,13 @@ namespace arfa.Interface.Exceptions
         {
             ErrorCode = code;
         }
+
+        public static void ThrowWhen(bool condition, string code, string message)
+        {
+            if (condition)
+            {
+                throw new ArfaException(code, message);
+            }
+        }
     }
 }

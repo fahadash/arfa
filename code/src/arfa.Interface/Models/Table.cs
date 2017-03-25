@@ -11,5 +11,6 @@ namespace arfa.Interface.Models
         public string TableName { get; set; }
         public int AvailableSlots { get; set; }
         public User Owner { get; set; }
+        public bool Suspended { get; set; }
     }
 }

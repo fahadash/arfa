@@ -21,7 +21,8 @@ namespace arfa.Repository.EfSql.Database
                 Owner = this.OwnerUser.ToInterface(),
                 TableId = this.TableId,
                 TableName= this.TableName,
-                AvailableSlots = 4 - this.TableUser.Count
+                AvailableSlots = 4 - this.TableUser.Count,
+                Suspended = this.Suspended
             };
         }
 
